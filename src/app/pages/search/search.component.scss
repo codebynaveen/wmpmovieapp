@@ -1,0 +1,25 @@
+.search-wrapper{
+  margin: 50px;
+  input{
+    width: 200px;
+    height: 20px;
+    border-radius: 20px;
+    padding: 10px;
+  }
+  button{
+    background-color: blue;
+    border: none;
+    color: white;
+    border-radius: 20px;
+    margin-left: 20px;
+    padding: 15px;
+    cursor: pointer;
+  }
+  .search-result{
+    background-color: bisque;
+    width: 300px;
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 50px;
+  }
+}

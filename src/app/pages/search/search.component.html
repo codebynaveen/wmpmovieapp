@@ -1,0 +1,10 @@
+<div class="search-wrapper">
+  <div class="search-form">
+    <input [(ngModel)]="searchString">
+    <button (click)="search()">Search</button>
+  </div>
+  <div class="search-result">
+    <p>Reversed: {{reverseString}}</p>
+    <p>First non-repeating character: {{uniqueChar}}</p>
+  </div>
+</div>
