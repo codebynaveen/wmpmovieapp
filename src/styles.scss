@@ -1,8 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-html,
-body {
-  height: 100%;
-  margin: 0;
-  max-width: 100%;
-  overflow-x: hidden;
-}
+
+@import "./styles/variables";
+
+@import "./styles/globals";
