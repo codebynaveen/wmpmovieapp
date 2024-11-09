@@ -4,15 +4,74 @@
 .episode-card {
   width: 100%;
   height: fit-content;
-  border-radius: $spacing-3;
   overflow: hidden;
-  aspect-ratio: 16 / 9;
+  @include d-flex(
+    $direction: row,
+    $align: center,
+    $justify: flex-start,
+    $gap: $spacing-4
+  );
 
   .episode-thumbnail {
-    width: 100%;
+    width: 220px;
     height: auto;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 3 / 4;
     object-fit: cover;
     object-position: center center;
+    border-radius: $spacing-3;
+  }
+
+  .episode-details {
+    @include d-flex(
+      $direction: column,
+      $align: flex-start,
+      $justify: flex-start,
+      $gap: $spacing-3
+    );
+
+    .episode-title {
+      @include font-primary($size: 22px, $weight: $font-weight-light);
+      margin: 0 0 $spacing-4 0;
+      padding: 0;
+    }
+
+    .episode-meta {
+      @include d-flex(
+        $direction: column,
+        $align: flex-start,
+        $justify: flex-start,
+        $gap: $spacing-3
+      );
+
+      .episode-rating,
+      .episode-code,
+      .episode-date,
+      .episode-duration {
+        @include d-flex(
+          $direction: row,
+          $align: center,
+          $justify: flex-start,
+          $gap: $spacing-3
+        );
+
+        svg {
+          * {
+            stroke:  #FFFFFF;
+          }
+        }
+      }
+
+      .episode-rating {
+        color: #F88401;
+
+        svg {
+          color:  #F88401;
+
+          * {
+            stroke:  #F88401;
+          }
+        }
+      }
+    }
   }
 }
