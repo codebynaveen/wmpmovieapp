@@ -25,6 +25,10 @@ export const routes: Routes = [
       {
         path: 'search',
         loadComponent: () => import('./pages/episode-search/episode-search.component').then(m => m.EpisodeSearchComponent)
+      },
+      {
+        path: 'detail/:episodeId',
+        loadComponent: () => import('./pages/episode-detail/episode-detail.component').then(m => m.EpisodeDetailComponent)
       }
     ]
   },

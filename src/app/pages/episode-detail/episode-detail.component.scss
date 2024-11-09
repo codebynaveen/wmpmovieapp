@@ -1,0 +1,130 @@
+@import "../../../styles/variables";
+@import "../../../styles/spacing";
+@import "../../../styles/mixins";
+
+// page header styles ---------------------------------------------------------------
+@import "../../../styles/component/page-header";
+
+// header icon
+.bookmark-icon {
+  font-size: 16px;
+  margin-left: $spacing-4;
+}
+
+// detail section styles ------------------------------------------------------------
+section.episode-detail-wrapper {
+}
+
+// header section --------------------------------------------------------------------
+.detail-header {
+  .cover-image {
+    width: 100%;
+    height: fit-content;
+    overflow: auto;
+
+    img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      object-position: center center;
+      margin: 0;
+      padding: 0;
+      border-radius: 0 0 $spacing-3 $spacing-3;
+    }
+  }
+
+  .header-info-wrapper {
+    @include d-flex(
+      $direction: row,
+      $justify: flex-start,
+      $align: flex-end,
+      $gap: $spacing-4
+    );
+    margin-top: -150px;
+    padding: $spacing-4 $spacing-5;
+
+    .episode-thumbnail {
+      width: 180px;
+      height: auto;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      object-position: center center;
+      border-radius: $spacing-3;
+    }
+
+    .episode-info-wrapper {
+      @include d-flex(
+        $direction: row,
+        $justify: space-between,
+        $align: center,
+        $gap: $spacing-4
+      );
+      width: 100%;
+      height: fit-content;
+      min-height: 100px;
+
+      .episode-title {
+        @include font-primary($size: 22px, $weight: $font-weight-light);
+        margin: 0 0 $spacing-4 0;
+        padding: 0;
+      }
+
+      .episode-meta {
+        @include d-flex(
+          $direction: row,
+          $align: center,
+          $justify: flex-end,
+          $gap: $spacing-3
+        );
+
+        .episode-rating,
+        .episode-code,
+        .episode-date,
+        .episode-duration {
+          @include d-flex(
+            $direction: row,
+            $align: center,
+            $justify: flex-start,
+            $gap: $spacing-3
+          );
+          opacity: 0.6;
+
+          svg {
+            * {
+              stroke: #ffffff;
+            }
+          }
+        }
+
+        .separator {
+          width: 1px;
+          height: 24px;
+          background-color: $white;
+          opacity: 0.6;
+        }
+
+        .episode-rating {
+          color: #f88401;
+          margin-left: $spacing-5;
+          opacity: 1 !important;
+
+          svg {
+            color: #f88401;
+
+            * {
+              stroke: #f88401;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// character list styles -------------------------------------------------------------
+.characters-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: auto;
+  gap: $spacing-4;
+}

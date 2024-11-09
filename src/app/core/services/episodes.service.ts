@@ -38,4 +38,13 @@ export class EpisodesService {
       })
     );
   }
+
+  getEpisodeInfo(episodeId: number): Observable<Episode> {
+    return this.http.get<Episode>(`${this.episodesList}/${episodeId}`).pipe(
+      catchError(error => {
+        console.error(`Error fetching selected episode. Episode: ${episodeId}`, error);
+        return throwError(error);
+      })
+    )
+  }
 }

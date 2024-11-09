@@ -7,6 +7,9 @@
   border-radius: $spacing-3;
   overflow: hidden;
   aspect-ratio: 16 / 9;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
 
   .episode-thumbnail {
     width: 100%;
@@ -14,5 +17,11 @@
     aspect-ratio: 16 / 9;
     object-fit: cover;
     object-position: center center;
+  }
+
+  &:hover {
+    opacity: 0.8;
+    border: 1px solid $accent-blue-color;
+    transition: all 0.3s ease;
   }
 }

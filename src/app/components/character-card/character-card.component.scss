@@ -1,0 +1,19 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.character-card {
+  @include d-flex($direction: column, $align: center, $justify: center ,$gap: $spacing-2);
+  width: 100%;
+  height: fit-content;
+
+  .character-image {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .character-name {
+    @include font-primary($size: 18px, $weight: $font-weight-light);
+  }
+}

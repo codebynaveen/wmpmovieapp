@@ -9,7 +9,7 @@
   width: 100%;
 
   .header-title {
-    @include font-primary($font-size-lg, $font-weight-light, $line-height-tight);
+    @include font-primary($font-size-lg, $font-weight-semibold, $line-height-tight);
     color: $secondary-color;
     margin: 0;
     padding: 0;
