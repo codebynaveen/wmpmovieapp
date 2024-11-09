@@ -1,0 +1,6 @@
+// This loop generates utility classes for varying opacity levels from 0 to 1 in increments of 0.25.
+@for $i from 0 through 4 {
+    .opacity-#{$i * 25} {
+        opacity: $i * 0.25;
+    }
+}

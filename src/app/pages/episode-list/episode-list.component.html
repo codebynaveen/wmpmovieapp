@@ -1,0 +1,58 @@
+<!-- page content -->
+<div class="page-container">
+  <!-- Header title section -->
+  <header class="app-header">
+    <h4 class="header-title">The Rick and Morty</h4>
+    <div class="search-input-component">
+      <input class="search-input" placeholder="Search" type="text"/>
+      <svg
+        class="search-icon"
+        fill="none"
+        height="24"
+        viewBox="0 0 24 24"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M17.5 17.5L22 22"
+          stroke="white"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+        />
+        <path
+          d="M20 11C20 6.02944 15.9706 2 11 2C6.02944 2 2 6.02944 2 11C2 15.9706 6.02944 20 11 20C15.9706 20 20 15.9706 20 11Z"
+          stroke="white"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+        />
+      </svg>
+    </div>
+  </header>
+
+  <!-- latest episodes list -->
+  <app-top-episodes-list [episodesList]="episodeList"></app-top-episodes-list>
+
+  <!-- tab view for episodes -->
+  <section class="tabular-view">
+    <!-- tabular navigation for episodes -->
+    <div class="tabs-list-container">
+      <ng-container *ngFor="let tab of tabList">
+        <button
+          (click)="selectTab(tab)"
+          [ngClass]="{'active': selectedTab === tab}"
+          class="tab-button"
+          type="button">
+          {{ tab }}
+        </button>
+      </ng-container>
+    </div>
+
+    <!-- episodes list -->
+    <div class="episodes-list-container">
+      <ng-container *ngFor="let episode of episodes">
+        <app-episode-card [episodeData]="episode"></app-episode-card>
+      </ng-container>
+    </div>
+  </section>
+</div>

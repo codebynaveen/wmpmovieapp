@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 
 export const routes: Routes = [
   {
@@ -14,7 +15,17 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
   },
   {
-    path: 'movies',
-    loadComponent: () => import('./pages/movie-list/movie-list.component').then(m => m.MovieListComponent)
-  }
+    path: 'episode',
+    component: MainLayoutComponent,
+    children: [
+      {
+        path: 'all',
+        loadComponent: () => import('./pages/episode-list/episode-list.component').then(m => m.EpisodeListComponent)
+      },
+      {
+        path: 'search',
+        loadComponent: () => import('./pages/episode-search/episode-search.component').then(m => m.EpisodeSearchComponent)
+      }
+    ]
+  },
 ];

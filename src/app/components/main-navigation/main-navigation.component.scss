@@ -1,0 +1,61 @@
+@import "../../../styles/variables";
+@import "../../../styles/spacing";
+@import "../../../styles/mixins";
+
+.main-navigation-container {
+  @include d-flex(
+    $direction: column,
+    $justify: center,
+    $align: center,
+    $gap: $spacing-5
+  );
+  height: 100%;
+  width: fit-content;
+  padding: 0 $spacing-5 0 0;
+
+  button.navigation-btn {
+    background: transparent;
+    border: 0 solid transparent;
+    @include d-flex(
+      $direction: column,
+      $justify: center,
+      $align: center,
+      $gap: $spacing-2
+    );
+    text-align: center;
+    color: transparentize($color: $white, $amount: 0.5);
+    cursor: pointer;
+
+    $icon-size: 38px;
+
+    svg {
+      width: $icon-size;
+      height: $icon-size;
+      transition: all 0.3s ease-in;
+
+      path {
+        stroke: transparentize($color: $white, $amount: 0.5);
+        transition: all 0.3s ease-in;
+      }
+    }
+
+    span {
+      transition: all 0.3s ease-in;
+    }
+
+    &:hover {
+      svg {
+        transition: all 0.3s ease-in;
+
+        path {
+          stroke: #0688ce;
+          transition: all 0.3s ease-in;
+        }
+      }
+
+      span {
+        color: #0688ce;
+      }
+    }
+  }
+}

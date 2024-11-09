@@ -1,3 +1,47 @@
+// color variations ------------------------------------------------------------
+
+// Main color theme variables
 $primary-color: #1e293b;
 $secondary-color: #cbd5e1;
 $accent-color: #10b981;
+
+$white: #FFFFFF;
+
+// Background colors
+$bg-primary: #242A32;   
+
+// Font Sizes
+$font-size-xs: 0.75rem; 
+$font-size-sm: 0.875rem; 
+$font-size-base: 1rem; 
+$font-size-md: 1.125rem; 
+$font-size-lg: 1.25rem; 
+$font-size-xl: 1.5rem;
+$font-size-2xl: 2rem;
+
+// font variations --------------------------------------------------------------
+
+// Font Weights
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Line Heights
+$line-height-tight: 1.2;
+$line-height-base: 1.5;
+$line-height-relaxed: 1.75;
+
+// spacing variations --------------------------------------------------------------
+
+// Base spacing unit (in rem)
+$spacing-unit: 0.25rem;
+
+// Spacing scale
+$spacing-0: 0;
+$spacing-1: $spacing-unit;        // 0.25rem
+$spacing-2: $spacing-unit * 2;    // 0.5rem
+$spacing-3: $spacing-unit * 4;    // 1rem
+$spacing-4: $spacing-unit * 8;    // 2rem
+$spacing-5: $spacing-unit * 16;   // 4rem

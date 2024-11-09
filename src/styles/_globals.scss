@@ -1,8 +1,114 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+}
 
 html,
 body {
   height: 100%;
   margin: 0;
-  max-width: 100%;
+  max-width: 100vw;
   overflow-x: hidden;
+  background-color: $bg-primary;
+  box-sizing: border-box;
 }
+
+@mixin font-style($weight, $style: normal) {
+  font-family: "Poppins", sans-serif;
+  font-weight: $weight;
+  font-style: $style;
+}
+
+/* Poppins Thin - Weight: 100, Style: Normal */
+.poppins-thin {
+  @include font-style(100);
+}
+
+/* Poppins Extra Light - Weight: 200, Style: Normal */
+.poppins-extralight {
+  @include font-style(200);
+}
+
+/* Poppins Light - Weight: 300, Style: Normal */
+.poppins-light {
+  @include font-style(300);
+}
+
+/* Poppins Regular - Weight: 400, Style: Normal */
+.poppins-regular {
+  @include font-style(400);
+}
+
+/* Poppins Medium - Weight: 500, Style: Normal */
+.poppins-medium {
+  @include font-style(500);
+}
+
+/* Poppins Semi Bold - Weight: 600, Style: Normal */
+.poppins-semibold {
+  @include font-style(600);
+}
+
+/* Poppins Bold - Weight: 700, Style: Normal */
+.poppins-bold {
+  @include font-style(700);
+}
+
+/* Poppins Extra Bold - Weight: 800, Style: Normal */
+.poppins-extrabold {
+  @include font-style(800);
+}
+
+/* Poppins Black - Weight: 900, Style: Normal */
+.poppins-black {
+  @include font-style(900);
+}
+
+/* Poppins Thin Italic - Weight: 100, Style: Italic */
+.poppins-thin-italic {
+  @include font-style(100, italic);
+}
+
+/* Poppins Extra Light Italic - Weight: 200, Style: Italic */
+.poppins-extralight-italic {
+  @include font-style(200, italic);
+}
+
+/* Poppins Light Italic - Weight: 300, Style: Italic */
+.poppins-light-italic {
+  @include font-style(300, italic);
+}
+
+/* Poppins Regular Italic - Weight: 400, Style: Italic */
+.poppins-regular-italic {
+  @include font-style(400, italic);
+}
+
+/* Poppins Medium Italic - Weight: 500, Style: Italic */
+.poppins-medium-italic {
+  @include font-style(500, italic);
+}
+
+/* Poppins Semi Bold Italic - Weight: 600, Style: Italic */
+.poppins-semibold-italic {
+  @include font-style(600, italic);
+}
+
+/* Poppins Bold Italic - Weight: 700, Style: Italic */
+.poppins-bold-italic {
+  @include font-style(700, italic);
+}
+
+/* Poppins Extra Bold Italic - Weight: 800, Style: Italic */
+.poppins-extrabold-italic {
+  @include font-style(800, italic);
+}
+
+/* Poppins Black Italic - Weight: 900, Style: Italic */
+.poppins-black-italic {
+  @include font-style(900, italic);
+}
+
+
