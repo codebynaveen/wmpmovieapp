@@ -13,7 +13,14 @@
     <app-search-box></app-search-box>
   </div>
 
-  <div class="search-result-placeholder">
+  <div class="loading-placeholder" *ngIf="isLoading">
+    <div class="spinner-icon-wrapper">
+      <img src="assets/loading-spinner/loading-spinner-icon.png" alt="Loading..." class="loading-spinner" />
+    </div>
+    <p>Fetching results...</p>
+  </div>
+
+  <div class="search-result-placeholder" *ngIf="!isLoading && episodesList.length === 0">
     <img
       alt="no result placeholder"
       class="placeholder-image"
@@ -23,5 +30,13 @@
     <p class="placeholder-text">
       Find your episodes by Title, categories, years, etc
     </p>
+  </div>
+
+  <div class="search-result-container" *ngIf="!isLoading && episodesList.length > 0">
+    <ng-container *ngFor="let episode of episodesList">
+      <app-episode-search-result-card
+        [episodeData]="episode"
+      ></app-episode-search-result-card>
+    </ng-container>
   </div>
 </div>
