@@ -4,7 +4,6 @@ import {
 } from "../../components/episode-search-result-card/episode-search-result-card.component";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
-import {SearchBoxComponent} from "../../components/search-box/search-box.component";
 import {faBookmark} from '@fortawesome/free-solid-svg-icons';
 import {Episode} from '../../core/models/episode';
 import {CharacterCardComponent} from '../../components/character-card/character-card.component';
@@ -24,7 +23,6 @@ import {Stills, Thumbnail} from '../../core/models/thumbnail';
     FaIconComponent,
     NgForOf,
     NgIf,
-    SearchBoxComponent,
     CharacterCardComponent,
     NgClass
   ],

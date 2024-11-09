@@ -4,7 +4,8 @@
   <header class="app-header">
     <h4 class="header-title">The Rick and Morty</h4>
     <div class="search-input-component">
-      <input class="search-input" placeholder="Search" type="text"/>
+      <input (keydown.enter)="searchEpisode()" [(ngModel)]="searchText" class="search-input" placeholder="Search"
+             type="text"/>
       <svg
         class="search-icon"
         fill="none"
@@ -12,6 +13,7 @@
         viewBox="0 0 24 24"
         width="24"
         xmlns="http://www.w3.org/2000/svg"
+        (click)="searchEpisode()"
       >
         <path
           d="M17.5 17.5L22 22"
@@ -31,7 +33,7 @@
   </header>
 
   <!-- latest episodes list -->
-  <app-top-episodes-list [episodesList]="episodeList"></app-top-episodes-list>
+  <app-top-episodes-list [episodesList]="topEpisodeList"></app-top-episodes-list>
 
   <!-- tab view for episodes -->
   <section class="tabular-view">
@@ -50,7 +52,7 @@
 
     <!-- episodes list -->
     <div class="episodes-list-container">
-      <ng-container *ngFor="let episode of episodes">
+      <ng-container *ngFor="let episode of allEpisodeList">
         <app-episode-card [episodeData]="episode"></app-episode-card>
       </ng-container>
     </div>

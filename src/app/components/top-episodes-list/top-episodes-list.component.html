@@ -1,7 +1,7 @@
 <div class="seasons-list-container">
   <ng-container *ngFor="let episode of episodesList">
-    <div class="season-card">
-      <img [src]="'https://placehold.co/400x600?text=' + episode.name"
+    <div [routerLink]="'/episode/detail/' + episode.id" class="season-card">
+      <img [src]="episode.thumbnail"
            alt="Placeholder for Episode {{ episode.id }} - {{ episode.name }}" class="season-thumbnail">
       <p class="season-number">{{ episode.id }}</p>
     </div>

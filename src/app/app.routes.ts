@@ -23,6 +23,10 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/episode-list/episode-list.component').then(m => m.EpisodeListComponent)
       },
       {
+        path: 'search',
+        loadComponent: () => import('./pages/episode-search/episode-search.component').then(m => m.EpisodeSearchComponent)
+      },
+      {
         path: 'search/:searchText',
         loadComponent: () => import('./pages/episode-search/episode-search.component').then(m => m.EpisodeSearchComponent)
       },

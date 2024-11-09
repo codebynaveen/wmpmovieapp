@@ -22,6 +22,13 @@ $season-number-border-color: #0c6b9f;
   border: 0 solid transparent;
   width: 100%;
   height: fit-content;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    opacity: 0.6;
+    transition: all 0.3s ease;
+  }
 
   img.season-thumbnail {
     width: 100%;
@@ -32,7 +39,7 @@ $season-number-border-color: #0c6b9f;
     border-radius: $spacing-3;
   }
 
-  $season-number-size: 80px;
+  $season-number-size: 120px;
 
   p.season-number {
     @include font-primary($season-number-size, null, $season-number-size);
@@ -41,7 +48,7 @@ $season-number-border-color: #0c6b9f;
     left: -15px;
     right: auto;
     top: auto;
-    bottom: 0;
+    bottom: 10px;
     text-shadow: -1px 1px 0 #0c6b9f, 1px 1px 0 #0c6b9f, 1px -1px 0 #0c6b9f,
     -1px -1px 0 #0c6b9f;
     -webkit-background-clip: text;

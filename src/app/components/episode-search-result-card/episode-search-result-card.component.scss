@@ -11,8 +11,16 @@
     $justify: flex-start,
     $gap: $spacing-4
   );
+  transition: all ease 300ms;
+  cursor: pointer;
+  border-radius: $spacing-3;
 
-  .episode-thumbnail {
+  &:hover {
+    background-color: transparentize($white, 0.9);
+    transition: all ease 300ms;
+  }
+
+  img.episode-thumbnail {
     width: 220px;
     height: auto;
     aspect-ratio: 3 / 4;
@@ -56,7 +64,7 @@
 
         svg {
           * {
-            stroke:  #FFFFFF;
+            stroke: #FFFFFF;
           }
         }
       }
@@ -65,10 +73,10 @@
         color: #F88401;
 
         svg {
-          color:  #F88401;
+          color: #F88401;
 
           * {
-            stroke:  #F88401;
+            stroke: #F88401;
           }
         }
       }

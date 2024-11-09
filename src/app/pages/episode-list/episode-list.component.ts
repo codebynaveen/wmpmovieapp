@@ -1,25 +1,29 @@
 import {Component, OnInit} from '@angular/core';
-import { TopEpisodesListComponent } from "../../components/top-episodes-list/top-episodes-list.component";
-import { NgClass, NgFor } from '@angular/common';
-import { EpisodeCardComponent } from "../../components/episode-card/episode-card.component";
-import {Episode} from '../../core/models/episode';
+import {TopEpisodesListComponent} from "../../components/top-episodes-list/top-episodes-list.component";
+import {NgClass, NgFor} from '@angular/common';
+import {EpisodeCardComponent} from "../../components/episode-card/episode-card.component";
+import {Episode, EpisodeResult} from '../../core/models/episode';
 import {EpisodesService} from '../../core/services/episodes.service';
 import {MainNavigationComponent} from '../../components/main-navigation/main-navigation.component';
+import {FormsModule} from '@angular/forms';
+import {Router} from '@angular/router';
+import {EpisodeThumbnailService} from '../../core/services/episode-thumbnail.service';
+import {extractEpisodeNumber} from '../../core/shared/utils';
+import {Stills, Thumbnail} from '../../core/models/thumbnail';
 
 @Component({
   selector: 'app-episodes-list',
   standalone: true,
   imports: [
     NgFor, NgClass, TopEpisodesListComponent,
-    EpisodeCardComponent, MainNavigationComponent
+    EpisodeCardComponent, MainNavigationComponent, FormsModule
   ],
   templateUrl: './episode-list.component.html',
   styleUrl: './episode-list.component.scss'
 })
 export class EpisodeListComponent implements OnInit {
 
-  episodeList: Episode[] = [];
-
+  isLoading: boolean = false;
   tabList: string[] = [
     'Now Playing',
     'Upcoming',
@@ -28,9 +32,16 @@ export class EpisodeListComponent implements OnInit {
   ];
   selectedTab: string = this.tabList[0];
 
-  episodes: Episode[] = []
+  topEpisodeList: Episode[] = [];
+  searchText: string = '';
 
-  constructor(private episodeService: EpisodesService) {
+  allEpisodeList: Episode[] = [];
+
+  constructor(
+    private episodeService: EpisodesService,
+    private episodeThumbnailService: EpisodeThumbnailService,
+    private router: Router
+  ) {
     this.selectedTab = this.tabList[0];
   }
 
@@ -40,15 +51,76 @@ export class EpisodeListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadLatestEpisodes();
+    this.loadAllEpisodes();
   }
 
   loadLatestEpisodes() {
+    this.isLoading = true;
     this.episodeService.getEpisodes(1,5).subscribe((data: Episode[]) => {
-      console.log(data);
-      this.episodeList = data;
-      console.log(data);
-      this.episodes = data;
+      this.topEpisodeList = data;
+      this.loadThumbnailsForEpisodes();
+      this.isLoading = false;
+    }, (error) => {
+      console.error('Error fetching episodes:', error);
+      this.isLoading = false;
     })
+  }
+
+  loadThumbnailsForEpisodes() {
+    this.topEpisodeList.forEach(episode => {
+      this.loadThumbnailImages(extractEpisodeNumber(episode.episode), episode.id, episode);
+    });
+  }
+
+  generateEpisodeThumbnailImageURL(imagesArray: Stills[]) {
+    return `https://image.tmdb.org/t/p/w500${imagesArray[0].file_path}`;
+  }
+
+  loadThumbnailImages(seasonId: number, episodeId: number, episode: Episode) {
+    this.episodeThumbnailService.loadEpisodeThumbnailData(seasonId, episodeId).subscribe((thumbnailData: Thumbnail) => {
+      episode.thumbnail = this.generateEpisodeThumbnailImageURL(thumbnailData.stills);
+    }, (error) => {
+      console.error('Error fetching episode thumbnail:', error);
+      episode.thumbnail = 'https://rickandmortyapi.com/api/character/avatar/249.jpeg' // setting this as the placeholder image because i found this one return the placeholder image like from the DB
+    })
+  }
+
+  loadAllEpisodes() {
+    this.isLoading = true;
+    this.episodeService.getAllEpisodes().subscribe((data: EpisodeResult) => {
+      console.log(data);
+      this.allEpisodeList = data.results;
+      this.loadThumbnailsForAllEpisodes();
+      this.isLoading = false;
+    }, (error) => {
+      console.error('Error fetching episodes:', error);
+      this.allEpisodeList = [];
+      this.isLoading = false;
+    })
+  }
+
+  generateAllEpisodeThumbnailImageURL(imagesArray: Stills[]) {
+    return `https://image.tmdb.org/t/p/w500${imagesArray[2].file_path}`;
+  }
+
+  loadAllThumbnailImages(seasonId: number, episodeId: number, episode: Episode) {
+    this.episodeThumbnailService.loadEpisodeThumbnailData(seasonId, episodeId).subscribe((thumbnailData: Thumbnail) => {
+      episode.thumbnail = this.generateAllEpisodeThumbnailImageURL(thumbnailData.stills);
+    }, (error) => {
+      console.error('Error fetching episode thumbnail:', error);
+      episode.thumbnail = 'https://rickandmortyapi.com/api/character/avatar/249.jpeg' // setting this as the placeholder image because i found this one return the placeholder image like from the DB
+    })
+  }
+
+  loadThumbnailsForAllEpisodes() {
+    this.allEpisodeList.forEach(episode => {
+      this.loadAllThumbnailImages(extractEpisodeNumber(episode.episode), episode.id, episode);
+    });
+  }
+
+  searchEpisode() {
+    console.log(this.searchText);
+    this.router.navigate([`episode/search/${this.searchText}`]);
   }
 
 }

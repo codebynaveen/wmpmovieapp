@@ -1,11 +1,5 @@
-<div class="episode-card">
-  <div class="episode-thumbnail">
-    <img
-      [src]="'https://placehold.co/400x600?text=' + episodeData.name"
-      alt=""
-      class="episode-thumbnail"
-    />
-  </div>
+<div [routerLink]="'/episode/detail/' + episodeData.id" class="episode-card">
+  <img [src]="episodeData.thumbnail" alt="" class="episode-thumbnail"/>
   <div class="episode-details">
     <h2 class="episode-title">{{ episodeData.name }}</h2>
 
