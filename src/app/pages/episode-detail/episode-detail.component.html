@@ -11,10 +11,10 @@
   <section class="episode-detail-wrapper">
     <div class="detail-header">
       <div class="cover-image">
-        <img alt="cover image" src="https://placehold.co/1600x260?text=Cover Image">
+        <img [src]="episodeCoverImage" alt="cover image">
       </div>
       <div class="header-info-wrapper">
-        <img alt="" class="episode-thumbnail" src="https://placehold.co/260x360?text=Thumbnail Image">
+        <img [src]="episodeThumbnailImage" alt="" class="episode-thumbnail">
 
         <div class="episode-info-wrapper">
           <h2 class="episode-title">{{ episodeData?.name }}</h2>
@@ -79,7 +79,17 @@
       </div>
     </div>
     <div class="detail-body">
-      <div class="info-tab-view"></div>
+      <div class="info-tab-view">
+        <ng-container *ngFor="let tab of tabList">
+          <button
+            (click)="selectTab(tab)"
+            [ngClass]="{'active': selectedTab === tab}"
+            class="tab-button"
+            type="button">
+            {{ tab }}
+          </button>
+        </ng-container>
+      </div>
 
       <div class="characters-list">
         <ng-container *ngFor="let character of characterList">

@@ -1,5 +1,5 @@
-import { Routes } from '@angular/router';
-import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
+import {Routes} from '@angular/router';
+import {MainLayoutComponent} from './layout/main-layout/main-layout.component';
 
 export const routes: Routes = [
   {
@@ -23,7 +23,7 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/episode-list/episode-list.component').then(m => m.EpisodeListComponent)
       },
       {
-        path: 'search',
+        path: 'search/:searchText',
         loadComponent: () => import('./pages/episode-search/episode-search.component').then(m => m.EpisodeSearchComponent)
       },
       {

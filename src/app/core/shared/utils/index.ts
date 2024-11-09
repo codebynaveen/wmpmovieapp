@@ -1,1 +1,1 @@
-export * from './array-to-string.util';
+export * from './string.util';

@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { Episode } from '../models/episode';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+import {Episode} from '../models/episode';
+import {generateRangeString} from '../shared/utils';
 
 @Injectable({
   providedIn: 'root'
@@ -15,23 +16,12 @@ export class EpisodesService {
   constructor(private http: HttpClient) {
   }
 
-  generateRange(start: number, end: number) {
-    let result = '';
-    for (let i = start; i <= end; i++) {
-      result += i;
-      if (i < end) {
-        result += ',';
-      }
-    }
-    return result;
-  }
-
   getEpisodes(start: number, end: number): Observable<Episode[]> {
     if (start >= end) {
       throw new Error('The start value must be less than the end value.');
     }
 
-    return this.http.get<Episode[]>(`${this.episodesList}/${this.generateRange(start, end)}`).pipe(
+    return this.http.get<Episode[]>(`${this.episodesList}/${generateRangeString(start, end)}`).pipe(
       catchError(error => {
         console.error('Error fetching latest episodes', error);
         return throwError(error);

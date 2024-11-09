@@ -121,6 +121,54 @@ section.episode-detail-wrapper {
   }
 }
 
+// tab view --------------------------------------------------------------------------
+.info-tab-view {
+  @include d-flex($direction: row, $justify: flex-start, $align: center);
+  width: 100%;
+  margin-bottom: $spacing-4;
+
+  button.tab-button {
+    @include font-primary(22px, $font-weight-light, $line-height-tight);
+    width: fit-content;
+    height: fit-content;
+    background-color: transparent;
+    position: relative;
+    padding: $spacing-4;
+    color: transparentize($color: $white, $amount: 0.4);
+    border-radius: $spacing-2;
+    border: 0 solid transparent;
+    margin: 0;
+    cursor: pointer;
+    transition: all 0.5s ease;
+
+    &.active {
+      color: $white;
+    }
+
+    &:hover::after,
+    &.active::after {
+      width: 100%;
+      left: 0;
+      right: auto;
+      transition: all 0.5s ease;
+    }
+
+    $underline-thickness: 4px;
+
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: auto;
+      width: 0;
+      opacity: 0.3;
+      height: $underline-thickness;
+      border-radius: $underline-thickness;
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+  }
+}
+
 // character list styles -------------------------------------------------------------
 .characters-list {
   display: grid;
