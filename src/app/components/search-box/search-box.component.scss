@@ -1,0 +1,36 @@
+@import "../../../styles/variables";
+@import "../../../styles/spacing";
+@import "../../../styles/mixins";
+
+// search input component styles
+.search-input-component {
+  @include d-flex($direction: row, $justify: flex-start, $align: center);
+  background-color: transparentize($color: $white, $amount: 0.8);
+  padding: calc($spacing-3 + 0.3rem) calc($spacing-4 + 0.3rem);
+  border-radius: $spacing-3;
+  width: 600px;
+
+  .search-input {
+    font-size: 18px;
+    font-weight: $font-size-md;
+    padding: 0;
+    background-color: transparent;
+    border: 0 solid transparent;
+    color: $white;
+    flex-grow: 1;
+    @include font-primary(18px, $font-weight-light, $line-height-tight);
+
+    &::placeholder {
+      color: transparentize($color: $white, $amount: 0.5);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  svg.search-icon {
+    transform: scaleX(-1);
+    opacity: 0.5;
+  }
+}

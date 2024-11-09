@@ -10,8 +10,39 @@
   font-size: 16px;
 }
 
-
 // search box container ---------------------------------------------------------------
 .search-box-container {
+  @include d-flex($direction: row, $align: center, $justify: center);
+  width: 100%;
+  height: fit-content;
+}
 
+// search result placeholder ---------------------------------------------------------------
+.search-result-placeholder {
+  @include d-flex($direction: column, $align: center, $justify: center);
+  width: 100%;
+  text-align: center;
+  padding-top: 8rem;
+
+  .placeholder-image {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .placeholder-title {
+    @include font-primary(32px, $font-weight-medium);
+    margin: 0;
+    padding: 0;
+    max-width: 350px;
+  }
+
+  .placeholder-text {
+    @include font-primary(18px, $font-weight-light);
+    max-width: 350px;
+    margin: 0;
+    padding: 0;
+    opacity: 0.6;
+  }
 }

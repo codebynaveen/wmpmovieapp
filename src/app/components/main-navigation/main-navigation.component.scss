@@ -43,7 +43,8 @@
       transition: all 0.3s ease-in;
     }
 
-    &:hover {
+    &:hover,
+    &.active {
       svg {
         transition: all 0.3s ease-in;
 

@@ -1,5 +1,6 @@
 <nav class="main-navigation-container">
-  <button [routerLink]="'/episode/all'" class="navigation-btn" type="button">
+  <button [routerLink]="'/episode/all'" class="navigation-btn" type="button" 
+          [ngClass]="{'active': router.url === '/episode/all'}">
     <svg
       fill="none"
       height="24"
@@ -24,7 +25,8 @@
 
     <span>Home</span>
   </button>
-  <button [routerLink]="'/episode/search'" class="navigation-btn" type="button">
+  <button [routerLink]="'/episode/search'" class="navigation-btn" type="button" 
+          [ngClass]="{'active': router.url === '/episode/search'}">
     <svg
       fill="none"
       height="24"

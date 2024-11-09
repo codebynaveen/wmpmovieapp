@@ -4,7 +4,7 @@
   <header class="app-header">
     <h4 class="header-title">
       Search
-      <fa-icon class="info-icon" [icon]="faInfoCircle"></fa-icon>
+      <fa-icon [icon]="faInfoCircle" class="info-icon"></fa-icon>
     </h4>
   </header>
 
@@ -13,5 +13,15 @@
     <app-search-box></app-search-box>
   </div>
 
-
+  <div class="search-result-placeholder">
+    <img
+      alt="no result placeholder"
+      class="placeholder-image"
+      src="assets/placeholder/no-results-placeholder.svg"
+    />
+    <h5 class="placeholder-title">We Are Sorry, We Can Not Find Anything :(</h5>
+    <p class="placeholder-text">
+      Find your episodes by Title, categories, years, etc
+    </p>
+  </div>
 </div>
