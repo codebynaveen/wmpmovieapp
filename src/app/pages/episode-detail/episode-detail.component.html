@@ -2,10 +2,13 @@
 <div class="page-container">
   <!-- Header title section -->
   <header class="app-header">
-    <h4 class="header-title-container">
-      Detail
+    <div class="header-title-container">
+      <button (click)="goBack()" class="go-back-btn" type="button">
+        <fa-icon [icon]="faAngleLeft" class="info-icon"></fa-icon>
+      </button>
+      <h4 class="page-title">Detail</h4>
       <fa-icon [icon]="faBookmark" class="bookmark-icon"></fa-icon>
-    </h4>
+    </div>
   </header>
 
   <section class="episode-detail-wrapper">
@@ -91,7 +94,7 @@
         </ng-container>
       </div>
 
-      <div class="characters-list">
+      <div [@listAnimation]="characterList.length" class="characters-list">
         <ng-container *ngFor="let character of characterList">
           <app-character-card [characterData]="character"></app-character-card>
         </ng-container>

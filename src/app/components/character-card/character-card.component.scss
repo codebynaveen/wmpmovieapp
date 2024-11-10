@@ -2,18 +2,43 @@
 @import "../../../styles/mixins";
 
 .character-card {
-  @include d-flex($direction: column, $align: center, $justify: center ,$gap: $spacing-2);
+  @include d-flex($direction: column, $align: center, $justify: center, $gap: $spacing-2);
   width: 100%;
   height: fit-content;
 
   .character-image {
-    width: 180px;
-    height: 180px;
     border-radius: 50%;
     object-fit: cover;
+    aspect-ratio: 1 / 1;
+    height: auto;
+
+    @include apply-styles-until('xs') {
+      width: 100px;
+    }
+
+    @include apply-styles-between('xs', 'md') {
+      width: 130px;
+    }
+
+    @include apply-styles-from('md') {
+      width: 180px;
+    }
   }
 
   .character-name {
-    @include font-primary($size: 18px, $weight: $font-weight-light);
+    text-align: center;
+    width: 100%;
+
+    @include apply-styles-until('xs') {
+      @include font-primary($size: 14px, $weight: $font-weight-light);
+    }
+
+    @include apply-styles-between('xs', 'md') {
+      @include font-primary($size: 16px, $weight: $font-weight-light);
+    }
+
+    @include apply-styles-from('md') {
+      @include font-primary($size: 18px, $weight: $font-weight-light);
+    }
   }
 }

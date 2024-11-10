@@ -4,17 +4,18 @@ import {
 } from "../../components/episode-search-result-card/episode-search-result-card.component";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
-import {faBookmark} from '@fortawesome/free-solid-svg-icons';
+import {faAngleLeft, faBookmark} from '@fortawesome/free-solid-svg-icons';
 import {Episode} from '../../core/models/episode';
 import {CharacterCardComponent} from '../../components/character-card/character-card.component';
 import {Character} from '../../core/models/character';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {EpisodesService} from '../../core/services/episodes.service';
 import {CharactersService} from '../../core/services/characters.service';
 import {extractIdsFromUrls, extractSeasonNumber} from '../../core/shared/utils';
 import {EpisodeThumbnailService} from '../../core/services/episode-thumbnail.service';
 import {Stills, Thumbnail} from '../../core/models/thumbnail';
 import {FormsModule} from '@angular/forms';
+import {animate, query, stagger, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-episode-detail',
@@ -29,7 +30,21 @@ import {FormsModule} from '@angular/forms';
     FormsModule
   ],
   templateUrl: './episode-detail.component.html',
-  styleUrl: './episode-detail.component.scss'
+  styleUrl: './episode-detail.component.scss',
+  animations: [
+    trigger('listAnimation', [
+      transition('* => *', [
+        query(':enter', [
+          style({opacity: 0, transform: 'translateY(10px)'}),
+          stagger(100, [
+            animate('1000ms ease-out',
+              style({opacity: 1, transform: 'translateY(0)'})
+            )
+          ])
+        ], {optional: true})
+      ])
+    ])
+  ]
 })
 export class EpisodeDetailComponent implements OnInit {
 
@@ -51,20 +66,23 @@ export class EpisodeDetailComponent implements OnInit {
   selectedTab: string = this.tabList[2];
   ratingScore: number = 0;
 
+  protected readonly faAngleLeft = faAngleLeft;
+
+  selectTab(tab: string) {
+    this.selectedTab = tab;
+  }
+
   constructor(
-    private route: ActivatedRoute,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
     private episodesService: EpisodesService,
     private charactersService: CharactersService,
     private episodeThumbnailService: EpisodeThumbnailService,
   ) {
   }
 
-  selectTab(tab: string) {
-    this.selectedTab = tab;
-  }
-
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+    this.activatedRoute.params.subscribe(params => {
       const episodeId = params['episodeId'];
       this.loadEpisodeInfo(episodeId);
     });
@@ -117,5 +135,9 @@ export class EpisodeDetailComponent implements OnInit {
 
   closeModal() {
     this.isModalOpen = false;
+  }
+
+  goBack() {
+    this.router.navigate([`episode/all`]);
   }
 }

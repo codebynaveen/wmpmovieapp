@@ -18,78 +18,312 @@ section.episode-detail-wrapper {
 // header section --------------------------------------------------------------------
 .detail-header {
   .cover-image {
-    width: 100%;
-    height: fit-content;
-    overflow: auto;
-
-    img {
+    @include apply-styles-until('xs') {
       width: 100%;
       height: 220px;
+      position: relative;
+      overflow: visible;
+    }
+
+    @include apply-styles-between('xs', 'md') {
+      width: 100%;
+      height: 220px;
+      position: relative;
+      overflow: visible;
+    }
+
+    @include apply-styles-between('md', 'lg') {
+      width: 100%;
+      height: 220px;
+      position: relative;
+      overflow: visible;
+    }
+
+    @include apply-styles-from('lg') {
+      width: 100%;
+      height: auto;
+    }
+
+    img {
       object-fit: cover;
       object-position: center center;
-      margin: 0;
       padding: 0;
-      border-radius: 0 0 $spacing-3 $spacing-3;
+
+      @include apply-styles-until('xs') {
+        position: absolute;
+        width: calc(100% + 2rem);
+        height: 220px;
+        left: -$spacing-3;
+        right: -$spacing-3;
+        top: auto;
+        bottom: auto;
+        margin: auto;
+        border-radius: 0 0 $spacing-3 $spacing-3;
+      }
+
+      @include apply-styles-between('xs', 'md') {
+        position: absolute;
+        width: calc(100% + 2rem);
+        height: 220px;
+        left: -$spacing-3;
+        right: -$spacing-3;
+        top: auto;
+        bottom: auto;
+        margin: auto;
+        border-radius: 0 0 $spacing-3 $spacing-3;
+      }
+
+      @include apply-styles-between('md', 'lg') {
+        position: absolute;
+        width: calc(100% + 2rem);
+        height: 220px;
+        left: -$spacing-3;
+        right: -$spacing-3;
+        top: auto;
+        bottom: auto;
+        margin: auto;
+        border-radius: 0 0 $spacing-3 $spacing-3;
+      }
+
+      @include apply-styles-from('lg') {
+        width: 100%;
+        height: 220px;
+        margin: 0;
+      }
     }
   }
 
   .header-info-wrapper {
-    @include d-flex(
-      $direction: row,
-      $justify: flex-start,
-      $align: flex-end,
-      $gap: $spacing-4
-    );
-    margin-top: -150px;
-    padding: $spacing-4 $spacing-5;
+    position: relative;
+
+    @include apply-styles-until('xs') {
+      padding: $spacing-2 $spacing-0;
+
+      @include d-flex(
+        $direction: column,
+        $justify: flex-start,
+        $align: flex-start,
+        $gap: $spacing-2
+      );
+    }
+
+    @include apply-styles-between('xs', 'md') {
+      @include d-flex(
+        $direction: column,
+        $justify: flex-start,
+        $align: flex-start,
+        $gap: $spacing-2
+      );
+    }
+
+    @include apply-styles-between('md', 'lg') {
+      margin-top: -150px;
+      padding: $spacing-3 $spacing-3;
+      @include d-flex(
+        $direction: row,
+        $justify: flex-start,
+        $align: flex-end,
+        $gap: $spacing-3
+      );
+    }
+
+    @include apply-styles-from('md') {
+      margin-top: -80px;
+      padding: $spacing-4;
+      @include d-flex(
+        $direction: row,
+        $justify: flex-start,
+        $align: flex-end,
+        $gap: $spacing-3
+      );
+    }
 
     .episode-thumbnail {
-      width: 180px;
       height: auto;
       aspect-ratio: 3 / 4;
       object-fit: cover;
       object-position: center center;
       border-radius: $spacing-3;
+
+      @include apply-styles-until('xs') {
+        position: absolute;
+        width: 80px;
+        top: -50px;
+      }
+
+      @include apply-styles-between('xs', 'md') {
+        position: absolute;
+        width: 80px;
+        top: -50px;
+      }
+
+      @include apply-styles-from('md') {
+        width: 120px;
+      }
     }
 
     .episode-info-wrapper {
-      @include d-flex(
-        $direction: row,
-        $justify: space-between,
-        $align: center,
-        $gap: $spacing-4
-      );
       width: 100%;
       height: fit-content;
       min-height: 100px;
 
+      @include apply-styles-until('xs') {
+        @include d-flex($direction: column, $justify: center, $align: center, $gap: $spacing-4);
+      }
+
+      @include apply-styles-between('xs', 'md') {
+        @include d-flex($direction: column, $justify: center, $align: center, $gap: $spacing-4);
+      }
+
+      @include apply-styles-between('md', 'lg') {
+        @include d-flex($direction: column, $justify: flex-start, $align: flex-start, $gap: $spacing-2);
+      }
+
+      @include apply-styles-from('lg') {
+        @include d-flex($direction: row, $justify: flex-start, $align: center, $gap: $spacing-3);
+      }
+
       .episode-title {
-        @include font-primary($size: 22px, $weight: $font-weight-light);
         margin: 0;
         padding: 0;
+        text-align: left;
+
+        @include apply-styles-until('xs') {
+          @include font-primary($size: 18px, $weight: $font-weight-light);
+          padding-left: 100px;
+          width: 100%;
+          text-align: left;
+        }
+
+        @include apply-styles-between('xs', 'md') {
+          @include font-primary($size: 18px, $weight: $font-weight-light);
+          padding-left: 100px;
+          width: 100%;
+          text-align: left;
+        }
+
+        @include apply-styles-between('md', 'lg') {
+          @include font-primary($size: 18px, $weight: $font-weight-light);
+        }
+
+        @include apply-styles-from('md') {
+          @include font-primary($size: 20px, $weight: $font-weight-light);
+          flex-grow: 1;
+        }
       }
 
       .episode-meta {
-        @include d-flex(
-          $direction: row,
-          $align: center,
-          $justify: flex-end,
-          $gap: $spacing-3
-        );
+        @include apply-styles-until('xs') {
+          @include d-flex(
+            $direction: row,
+            $align: center,
+            $justify: center,
+            $gap: $spacing-2,
+            $wrap: wrap,
+          );
+        }
+
+        @include apply-styles-between('xs', 'md') {
+          @include d-flex(
+            $direction: row,
+            $align: center,
+            $justify: flex-end,
+            $gap: $spacing-2
+          );
+        }
+
+        @include apply-styles-between('md', 'lg') {
+          width: 100%;
+          @include d-flex(
+            $direction: row,
+            $align: center,
+            $justify: flex-end,
+            $gap: $spacing-2
+          );
+        }
+
+        @include apply-styles-from('lg') {
+          @include d-flex(
+            $direction: row,
+            $align: center,
+            $justify: flex-end,
+            $gap: $spacing-2
+          );
+        }
 
         .episode-rating,
         .episode-code,
         .episode-date,
         .episode-duration {
-          @include d-flex(
-            $direction: row,
-            $align: center,
-            $justify: flex-start,
-            $gap: $spacing-3
-          );
           opacity: 0.6;
 
+          @include apply-styles-until('xs') {
+            @include font-primary($size: 12px, $weight: $font-weight-light);
+            white-space: nowrap;
+            @include d-flex(
+              $direction: row,
+              $align: center,
+              $justify: flex-start,
+              $gap: $spacing-2
+            );
+          }
+
+          @include apply-styles-between('xs', 'md') {
+            @include font-primary($size: 12px, $weight: $font-weight-light);
+            white-space: nowrap;
+            @include d-flex(
+              $direction: row,
+              $align: center,
+              $justify: flex-start,
+              $gap: $spacing-2
+            );
+          }
+
+          @include apply-styles-between('md', 'lg') {
+            @include font-primary($size: 12px, $weight: $font-weight-light);
+            white-space: nowrap;
+            @include d-flex(
+              $direction: row,
+              $align: center,
+              $justify: flex-start,
+              $gap: $spacing-2
+            );
+          }
+
+          @include apply-styles-from('lg') {
+            @include d-flex(
+              $direction: row,
+              $align: center,
+              $justify: flex-start,
+              $gap: $spacing-2
+            );
+          }
+
           svg {
+            @include apply-styles-until('xs') {
+              width: 14px;
+              height: 14px;
+              flex-shrink: 0;
+            }
+
+            @include apply-styles-between('xs', 'md') {
+              width: 14px;
+              height: 14px;
+              flex-shrink: 0;
+            }
+
+            @include apply-styles-between('md', 'lg') {
+              width: 14px;
+              height: 14px;
+              flex-shrink: 0;
+            }
+
+            @include apply-styles-from('lg') {
+              width: 16px;
+              height: 16px;
+              flex-shrink: 0;
+            }
+
             * {
               stroke: #ffffff;
             }
@@ -98,19 +332,49 @@ section.episode-detail-wrapper {
 
         .separator {
           width: 1px;
-          height: 24px;
           background-color: $white;
           opacity: 0.6;
+
+          @include apply-styles-until('xs') {
+            height: 14px;
+          }
+
+          @include apply-styles-between('xs', 'md') {
+            height: 14px;
+          }
+
+          @include apply-styles-between('md', 'lg') {
+            height: 14px;
+          }
+
+          @include apply-styles-from('lg') {
+            height: 24px;
+          }
         }
 
         .episode-rating {
           color: #f88401;
-          margin-left: $spacing-5;
           opacity: 1 !important;
           padding: $spacing-3 $spacing-3;
           cursor: pointer;
           user-select: none;
           border-radius: $spacing-3;
+
+          @include apply-styles-until('xs') {
+            display: none;
+          }
+
+          @include apply-styles-between('xs', 'md') {
+            display: none;
+          }
+
+          @include apply-styles-between('md', 'lg') {
+            margin-left: auto;
+          }
+
+          @include apply-styles-from('lg') {
+            margin-left: $spacing-5;
+          }
 
           &:hover {
             background-color: transparentize($accent-yellow-color, 0.9);
@@ -136,19 +400,53 @@ section.episode-detail-wrapper {
   width: 100%;
   margin-bottom: $spacing-4;
 
+  @include apply-styles-until('xs') {
+    overflow-x: auto;
+  }
+
+  @include apply-styles-between('xs', 'md') {
+    overflow-x: auto;
+  }
+
+  @include apply-styles-between('md', 'lg') {
+    overflow-x: auto;
+  }
+
+  @include apply-styles-from('md') {
+
+  }
+
   button.tab-button {
-    @include font-primary(22px, $font-weight-light, $line-height-tight);
     width: fit-content;
     height: fit-content;
     background-color: transparent;
     position: relative;
-    padding: $spacing-4;
     color: transparentize($color: $white, $amount: 0.4);
     border-radius: $spacing-2;
     border: 0 solid transparent;
     margin: 0;
     cursor: pointer;
     transition: all 0.5s ease;
+
+    @include apply-styles-until('xs') {
+      @include font-primary(14px, $font-weight-light, $line-height-tight);
+      padding: $spacing-2 $spacing-3;
+    }
+
+    @include apply-styles-between('xs', 'md') {
+      @include font-primary(14px, $font-weight-light, $line-height-tight);
+      padding: $spacing-3;
+    }
+
+    @include apply-styles-between('md', 'lg') {
+      @include font-primary(16px, $font-weight-light, $line-height-tight);
+      padding: $spacing-3 $spacing-4;
+    }
+
+    @include apply-styles-from('lg') {
+      @include font-primary(18px, $font-weight-light, $line-height-tight);
+      padding: $spacing-3 $spacing-4;
+    }
 
     &.active {
       color: $white;
@@ -181,9 +479,28 @@ section.episode-detail-wrapper {
 // character list styles -------------------------------------------------------------
 .characters-list {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
   grid-auto-rows: auto;
   gap: $spacing-4;
+
+  @include apply-styles-until('xs') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include apply-styles-between('xs', 'sm') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include apply-styles-between('sm', 'md') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include apply-styles-between('md', 'lg') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include apply-styles-from('lg') {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }
 
 // rating modal ----------------------------------------------------------------------
