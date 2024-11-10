@@ -2,18 +2,19 @@
 <div class="page-container">
   <!-- Header title section -->
   <header class="app-header">
-    <h4 class="header-title">
-      <fa-icon [icon]="faAngleLeft" class="info-icon"></fa-icon>
-      Search
+    <div class="header-title-container">
+      <button (click)="goBack()" class="go-back-btn" type="button">
+        <fa-icon [icon]="faAngleLeft" class="info-icon"></fa-icon>
+      </button>
+      <h4 class="page-title">Search</h4>
       <fa-icon [icon]="faInfoCircle" class="info-icon"></fa-icon>
-    </h4>
+    </div>
   </header>
 
   <!-- search-box component -->
   <div class="search-box-container">
     <div class="search-input-component">
-      <input (keydown.enter)="searchEpisode()" [(ngModel)]="searchText" class="search-input" placeholder="Search"
-             type="text"/>
+      <input (keyup)="searchEpisode()" [(ngModel)]="searchText" class="search-input" placeholder="Search" type="text"/>
       <svg
         class="search-icon"
         fill="none"
@@ -58,7 +59,8 @@
     </p>
   </div>
 
-  <div class="search-result-container" *ngIf="!isLoading && episodesList.length > 0">
+  <div *ngIf="!isLoading && episodesList.length > 0" [@listAnimation]="episodesList.length"
+       class="search-result-container">
     <ng-container *ngFor="let episode of episodesList">
       <app-episode-search-result-card
         [episodeData]="episode"

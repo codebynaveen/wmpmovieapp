@@ -5,10 +5,18 @@
   }
 
   @include apply-styles-between('xs', 'md') {
+    padding: $spacing-4 $spacing-4;
+  }
+
+  @include apply-styles-between('md', 'lg') {
     padding: $spacing-4;
   }
 
-  @include apply-styles-from('md') {
+  @include apply-styles-between('lg', 'xl') {
+    padding: $spacing-4;
+  }
+
+  @include apply-styles-from('xl') {
     padding: $spacing-5;
   }
 }
@@ -32,16 +40,16 @@
     margin-bottom: $spacing-4;
   }
 
-  .header-title {
+  .header-title-container {
     @include font-primary($font-size-lg, $font-weight-semibold, $line-height-tight);
     width: 100%;
     color: $secondary-color;
-    margin: 0;
     padding: 0;
     left: 0;
 
     @include apply-styles-until('xs') {
       @include d-flex($direction: row, $justify: space-between, $align: center);
+      margin: 0 0 $spacing-3 0;
     }
 
     @include apply-styles-between('xs', 'md') {
@@ -50,6 +58,38 @@
 
     @include apply-styles-from('md') {
       text-align: left;
+    }
+
+
+    .page-title {
+      @include font-primary($size: $font-size-lg, $weight: $font-weight-regular, $line-height: $line-height-tight);
+    }
+
+    button.go-back-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: $spacing-3;
+      border: 0 solid transparent;
+      background-color: transparent;
+      color: $white;
+
+      @include apply-styles-until('xs') {
+        @include d-flex($direction: row, $justify: center, $align: center);
+      }
+
+      @include apply-styles-between('xs', 'md') {
+        @include d-flex($direction: row, $justify: center, $align: center);
+      }
+
+      @include apply-styles-from('md') {
+        display: none;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: transparentize($white, 0.8);
+        outline: none;
+      }
     }
   }
 }

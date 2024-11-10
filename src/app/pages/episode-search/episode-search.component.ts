@@ -10,10 +10,11 @@ import {
   EpisodeSearchResultCardComponent
 } from '../../components/episode-search-result-card/episode-search-result-card.component';
 import {FormsModule} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {EpisodeThumbnailService} from '../../core/services/episode-thumbnail.service';
 import {Stills, Thumbnail} from '../../core/models/thumbnail';
 import {extractEpisodeNumber} from '../../core/shared/utils';
+import {animate, query, stagger, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-episode-search',
@@ -27,7 +28,21 @@ import {extractEpisodeNumber} from '../../core/shared/utils';
     EpisodeSearchResultCardComponent, FormsModule
   ],
   templateUrl: './episode-search.component.html',
-  styleUrl: './episode-search.component.scss'
+  styleUrl: './episode-search.component.scss',
+  animations: [
+    trigger('listAnimation', [
+      transition('* => *', [
+        query(':enter', [
+          style({opacity: 0, transform: 'translateY(10px)'}),
+          stagger(100, [
+            animate('600ms ease-out',
+              style({opacity: 1, transform: 'translateY(0)'})
+            )
+          ])
+        ], {optional: true})
+      ])
+    ])
+  ]
 })
 export class EpisodeSearchComponent implements OnInit {
 
@@ -43,6 +58,7 @@ export class EpisodeSearchComponent implements OnInit {
     private episodeService: EpisodesService,
     private episodeThumbnailService: EpisodeThumbnailService,
     private activatedRoute: ActivatedRoute,
+    private router: Router,
   ) {
   }
 
@@ -73,6 +89,10 @@ export class EpisodeSearchComponent implements OnInit {
     this.episodesList.forEach(episode => {
       this.loadThumbnailImages(extractEpisodeNumber(episode.episode), episode.id, episode);
     });
+  }
+
+  goBack() {
+    this.router.navigate([`episode/all`]);
   }
 
   searchEpisode() {

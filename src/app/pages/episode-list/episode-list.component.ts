@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 import {EpisodeThumbnailService} from '../../core/services/episode-thumbnail.service';
 import {extractEpisodeNumber} from '../../core/shared/utils';
 import {Stills, Thumbnail} from '../../core/models/thumbnail';
+import {animate, query, stagger, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-episodes-list',
@@ -19,7 +20,21 @@ import {Stills, Thumbnail} from '../../core/models/thumbnail';
     EpisodeCardComponent, MainNavigationComponent, FormsModule
   ],
   templateUrl: './episode-list.component.html',
-  styleUrl: './episode-list.component.scss'
+  styleUrl: './episode-list.component.scss',
+  animations: [
+    trigger('listAnimation', [
+      transition('* => *', [
+        query(':enter', [
+          style({opacity: 0, transform: 'translateY(10px)'}),
+          stagger(100, [
+            animate('1000ms ease-out',
+              style({opacity: 1, transform: 'translateY(0)'})
+            )
+          ])
+        ], {optional: true})
+      ])
+    ])
+  ]
 })
 export class EpisodeListComponent implements OnInit {
 

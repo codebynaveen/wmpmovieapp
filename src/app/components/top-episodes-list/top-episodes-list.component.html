@@ -1,4 +1,4 @@
-<div class="seasons-list-container">
+<div [@listAnimation]="episodesList.length" class="seasons-list-container">
   <ng-container *ngFor="let episode of episodesList">
     <div [routerLink]="'/episode/detail/' + episode.id" class="season-card">
       <img [src]="episode.thumbnail"

@@ -8,11 +8,11 @@
   color: $secondary-color;
 
   @include apply-styles-until('xs') {
-    @include d-flex($direction: column, $justify: flex-start, $align: flex-start, $gap: 0);
+    @include d-flex($direction: column, $justify: flex-start, $align: stretch, $gap: 0);
   }
 
   @include apply-styles-between('xs', 'md') {
-    @include d-flex($direction: column, $justify: flex-start, $align: flex-start, $gap: 0);
+    @include d-flex($direction: column, $justify: flex-start, $align: stretch, $gap: 0);
   }
 
   @include apply-styles-from('md') {
@@ -27,6 +27,9 @@
       height: fit-content;
       position: absolute;
       bottom: 0;
+      background-color: $primary-color;
+      border-top: 2px solid $accent-blue-color;
+      padding: 0;
     }
 
     @include apply-styles-between('xs', 'md') {
@@ -34,8 +37,9 @@
       height: fit-content;
       position: sticky;
       bottom: 0;
-      padding: $spacing-3 $spacing-2;
       background-color: $primary-color;
+      border-top: 2px solid $accent-blue-color;
+      padding: $spacing-3 0;
     }
 
     @include apply-styles-from('md') {

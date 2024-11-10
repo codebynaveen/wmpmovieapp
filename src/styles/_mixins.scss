@@ -37,6 +37,12 @@
   line-height: $line-height;
 }
 
+@mixin font-style($weight, $style: normal) {
+  font-family: "Poppins", sans-serif;
+  font-weight: $weight;
+  font-style: $style;
+}
+
 // Breakpoint Map
 $breakpoints: (
   'xs': 375px,

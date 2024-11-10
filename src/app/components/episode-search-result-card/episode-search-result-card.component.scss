@@ -9,11 +9,24 @@
     $direction: row,
     $align: center,
     $justify: flex-start,
-    $gap: $spacing-4
   );
   transition: all ease 300ms;
   cursor: pointer;
-  border-radius: $spacing-3;
+
+  @include apply-styles-until('xs') {
+    border-radius: $spacing-2;
+    gap: $spacing-2;
+  }
+
+  @include apply-styles-between('xs', 'md') {
+    border-radius: $spacing-2;
+    gap: $spacing-3;
+  }
+
+  @include apply-styles-from('md') {
+    border-radius: $spacing-3;
+    gap: $spacing-4;
+  }
 
   &:hover {
     background-color: transparentize($white, 0.9);
@@ -21,35 +34,83 @@
   }
 
   img.episode-thumbnail {
-    width: 220px;
-    height: auto;
     aspect-ratio: 3 / 4;
     object-fit: cover;
     object-position: center center;
     border-radius: $spacing-3;
+
+    @include apply-styles-until('xs') {
+      width: 90px;
+      height: auto;
+    }
+
+    @include apply-styles-between('xs', 'md') {
+      height: auto;
+      width: 160px;
+    }
+
+    @include apply-styles-from('md') {
+      width: 220px;
+      height: auto;
+    }
   }
 
   .episode-details {
     @include d-flex(
       $direction: column,
       $align: flex-start,
-      $justify: flex-start,
-      $gap: $spacing-3
+      $justify: flex-start
     );
 
+    @include apply-styles-until('xs') {
+      gap: $spacing-2;
+    }
+
+    @include apply-styles-between('xs', 'md') {
+      gap: $spacing-3;
+    }
+
+    @include apply-styles-from('md') {
+      gap: $spacing-4;
+    }
+
     .episode-title {
-      @include font-primary($size: 22px, $weight: $font-weight-light);
-      margin: 0 0 $spacing-4 0;
       padding: 0;
+
+      @include apply-styles-until('xs') {
+        @include font-primary($size: 12px, $weight: $font-weight-light);
+        margin: 0 0 $spacing-1 0;
+      }
+
+      @include apply-styles-between('xs', 'md') {
+        @include font-primary($size: 18px, $weight: $font-weight-light);
+        margin: 0 0 $spacing-1 0;
+      }
+
+      @include apply-styles-from('md') {
+        @include font-primary($size: 22px, $weight: $font-weight-light);
+        margin: 0 0 $spacing-4 0;
+      }
     }
 
     .episode-meta {
       @include d-flex(
         $direction: column,
         $align: flex-start,
-        $justify: flex-start,
-        $gap: $spacing-3
+        $justify: flex-start
       );
+
+      @include apply-styles-until('xs') {
+        gap: $spacing-1;
+      }
+
+      @include apply-styles-between('xs', 'md') {
+        gap: $spacing-1;
+      }
+
+      @include apply-styles-from('md') {
+        gap: $spacing-3;
+      }
 
       .episode-rating,
       .episode-code,
@@ -58,11 +119,50 @@
         @include d-flex(
           $direction: row,
           $align: center,
-          $justify: flex-start,
-          $gap: $spacing-3
+          $justify: flex-start
         );
 
+        @include apply-styles-until('xs') {
+          gap: $spacing-2;
+          @include font-primary($size: 12px);
+        }
+
+        @include apply-styles-between('xs', 'md') {
+          gap: $spacing-2;
+          @include font-primary($size: 14px);
+        }
+
+        @include apply-styles-between('md', 'lg') {
+          gap: $spacing-2;
+          @include font-primary($size: 14px);
+        }
+
+        @include apply-styles-from('lg') {
+          gap: $spacing-3;
+          @include font-primary($size: 18px);
+        }
+
         svg {
+          @include apply-styles-until('xs') {
+            width: 12px;
+            height: 12px;
+          }
+
+          @include apply-styles-between('xs', 'md') {
+            width: 16px;
+            height: 16px;
+          }
+
+          @include apply-styles-between('md', 'lg') {
+            width: 18px;
+            height: 18px;
+          }
+
+          @include apply-styles-from('lg') {
+            width: 22px;
+            height: 22px;
+          }
+
           * {
             stroke: #FFFFFF;
           }

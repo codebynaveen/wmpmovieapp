@@ -15,24 +15,24 @@
   @include apply-styles-until('xs') {
     @include d-flex(
       $direction: row,
-      $justify: space-evenly,
-      $align: center,
-      $gap: $spacing-5
+      $justify: space-between,
+      $align: center
     );
     width: 100%;
+    padding: $spacing-3;
   }
 
   @include apply-styles-between('xs', 'md') {
     @include d-flex(
       $direction: row,
       $justify: space-evenly,
-      $align: center,
-      $gap: $spacing-5
+      $align: center
     );
     width: 100%;
+    padding: 0 0 0 0;
   }
 
-  @include apply-styles-from('md') {
+  @include apply-styles-between('md', 'lg') {
     @include d-flex(
       $direction: column,
       $justify: center,
@@ -40,6 +40,26 @@
       $gap: $spacing-5
     );
     padding: 0 $spacing-5 0 0;
+  }
+
+  @include apply-styles-between('lg', 'xl') {
+    @include d-flex(
+      $direction: column,
+      $justify: center,
+      $align: center,
+      $gap: $spacing-5
+    );
+    padding: 0 $spacing-5 0 0;
+  }
+
+  @include apply-styles-from('xl') {
+    @include d-flex(
+      $direction: column,
+      $justify: center,
+      $align: center,
+      $gap: $spacing-5
+    );
+    padding: 0 $spacing-1 0 0;
   }
 
   button.navigation-btn {
@@ -55,9 +75,34 @@
     color: transparentize($color: $white, $amount: 0.5);
     cursor: pointer;
 
+    @include apply-styles-until('xs') {
+      width: fit-content;
+      padding: 0;
+    }
+
+    @include apply-styles-between('xs', 'md') {
+      width: 90px;
+    }
+
+    @include apply-styles-from('md') {
+    }
+
     $icon-size: 38px;
 
     svg {
+
+      @include apply-styles-until('xs') {
+        $icon-size: 18px;
+      }
+
+      @include apply-styles-between('xs', 'md') {
+        $icon-size: 22px;
+      }
+
+      @include apply-styles-from('md') {
+
+      }
+
       width: $icon-size;
       height: $icon-size;
       transition: all 0.3s ease-in;
@@ -70,6 +115,17 @@
 
     span {
       transition: all 0.3s ease-in;
+
+      @include apply-styles-until('xs') {
+        @include font-primary($size: 10px, $weight: $font-weight-medium);
+      }
+
+      @include apply-styles-between('xs', 'md') {
+        width: 90px;
+      }
+
+      @include apply-styles-from('md') {
+      }
     }
 
     &:hover,
