@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { MovieNamesService } from './movie-names.service';
-import { NgFor } from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {MovieNamesService} from './movie-names.service';
+import {NgFor} from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -26,9 +26,8 @@ export class HomeComponent implements OnInit {
   loadAllMovies() {
     this.movieNameService.getAllEpisodes().subscribe((data: any) => {
       this.episodes = data.results;
-      // let episodesList = data?.results; 
-      // console.log(episodesList);
-      
+      // let episodesList = data?.results;
+
       // episodesList.forEach((episode, index) => {
       //   this.episodes.push(episode);
       // })

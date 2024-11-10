@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {EpisodeCardComponent} from '../../components/episode-card/episode-card.component';
 import {NgFor, NgIf, NgOptimizedImage} from '@angular/common';
 import {TopEpisodesListComponent} from '../../components/top-episodes-list/top-episodes-list.component';
@@ -15,6 +15,7 @@ import {EpisodeThumbnailService} from '../../core/services/episode-thumbnail.ser
 import {Stills, Thumbnail} from '../../core/models/thumbnail';
 import {extractEpisodeNumber} from '../../core/shared/utils';
 import {animate, query, stagger, style, transition, trigger} from '@angular/animations';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-episode-search',
@@ -44,7 +45,7 @@ import {animate, query, stagger, style, transition, trigger} from '@angular/anim
     ])
   ]
 })
-export class EpisodeSearchComponent implements OnInit {
+export class EpisodeSearchComponent implements OnInit, OnDestroy {
 
   protected readonly faInfoCircle = faInfoCircle;
   protected readonly faAngleLeft = faAngleLeft;
@@ -53,6 +54,8 @@ export class EpisodeSearchComponent implements OnInit {
   isLoading: boolean = false;
 
   searchText: string = '';
+
+  private subscriptions: Subscription[] = [];
 
   constructor(
     private episodeService: EpisodesService,
@@ -63,14 +66,19 @@ export class EpisodeSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
+    let activeRouteServiceSub = this.activatedRoute.params.subscribe(params => {
       this.searchText = params['searchText'] || '';
       if (this.searchText) {
         this.searchEpisode();
       } else {
         this.loadDefaultEpisodes();
       }
-    })
+    });
+    this.subscriptions.push(activeRouteServiceSub);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   loadDefaultEpisodes() {
@@ -97,7 +105,7 @@ export class EpisodeSearchComponent implements OnInit {
 
   searchEpisode() {
     this.isLoading = true;
-    this.episodeService.searchEpisodesByName(this.searchText).subscribe((episodes: EpisodeResult) => {
+    let episodeServiceSub = this.episodeService.searchEpisodesByName(this.searchText).subscribe((episodes: EpisodeResult) => {
       this.episodesList = episodes.results;
       this.loadThumbnailsForEpisodes();
       this.isLoading = false;
@@ -106,6 +114,7 @@ export class EpisodeSearchComponent implements OnInit {
       this.isLoading = false;
       this.episodesList = [];
     })
+    this.subscriptions.push(episodeServiceSub);
   }
 
   generateEpisodeThumbnailImageURL(imagesArray: Stills[]) {
@@ -113,11 +122,12 @@ export class EpisodeSearchComponent implements OnInit {
   }
 
   loadThumbnailImages(seasonId: number, episodeId: number, episode: Episode) {
-    this.episodeThumbnailService.loadEpisodeThumbnailData(seasonId, episodeId).subscribe((thumbnailData: Thumbnail) => {
+    let episodeThumbnailServiceSub = this.episodeThumbnailService.loadEpisodeThumbnailData(seasonId, episodeId).subscribe((thumbnailData: Thumbnail) => {
       episode.thumbnail = this.generateEpisodeThumbnailImageURL(thumbnailData.stills);
     }, (error) => {
       console.error('Error fetching episode thumbnail:', error);
       episode.thumbnail = 'https://rickandmortyapi.com/api/character/avatar/249.jpeg' // setting this as the placeholder image because i found this one return the placeholder image like from the DB
-    })
+    });
+    this.subscriptions.push(episodeThumbnailServiceSub);
   }
 }

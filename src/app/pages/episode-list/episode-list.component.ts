@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TopEpisodesListComponent} from "../../components/top-episodes-list/top-episodes-list.component";
 import {NgClass, NgFor} from '@angular/common';
 import {EpisodeCardComponent} from "../../components/episode-card/episode-card.component";
@@ -11,6 +11,7 @@ import {EpisodeThumbnailService} from '../../core/services/episode-thumbnail.ser
 import {extractEpisodeNumber} from '../../core/shared/utils';
 import {Stills, Thumbnail} from '../../core/models/thumbnail';
 import {animate, query, stagger, style, transition, trigger} from '@angular/animations';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-episodes-list',
@@ -36,7 +37,7 @@ import {animate, query, stagger, style, transition, trigger} from '@angular/anim
     ])
   ]
 })
-export class EpisodeListComponent implements OnInit {
+export class EpisodeListComponent implements OnInit, OnDestroy {
 
   isLoading: boolean = false;
   tabList: string[] = [
@@ -51,6 +52,8 @@ export class EpisodeListComponent implements OnInit {
   searchText: string = '';
 
   allEpisodeList: Episode[] = [];
+
+  private subscriptions: Subscription[] = [];
 
   constructor(
     private episodeService: EpisodesService,
@@ -69,16 +72,21 @@ export class EpisodeListComponent implements OnInit {
     this.loadAllEpisodes();
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
   loadLatestEpisodes() {
     this.isLoading = true;
-    this.episodeService.getEpisodes(1,5).subscribe((data: Episode[]) => {
+    const latestEpisodesSub = this.episodeService.getEpisodes(1, 5).subscribe((data: Episode[]) => {
       this.topEpisodeList = data;
       this.loadThumbnailsForEpisodes();
       this.isLoading = false;
     }, (error) => {
       console.error('Error fetching episodes:', error);
       this.isLoading = false;
-    })
+    });
+    this.subscriptions.push(latestEpisodesSub);
   }
 
   loadThumbnailsForEpisodes() {
@@ -102,7 +110,7 @@ export class EpisodeListComponent implements OnInit {
 
   loadAllEpisodes() {
     this.isLoading = true;
-    this.episodeService.getAllEpisodes().subscribe((data: EpisodeResult) => {
+    const allEpisodesSub = this.episodeService.getAllEpisodes().subscribe((data: EpisodeResult) => {
       this.allEpisodeList = data.results;
       this.loadThumbnailsForAllEpisodes();
       this.isLoading = false;
@@ -110,7 +118,9 @@ export class EpisodeListComponent implements OnInit {
       console.error('Error fetching episodes:', error);
       this.allEpisodeList = [];
       this.isLoading = false;
-    })
+    });
+
+    this.subscriptions.push(allEpisodesSub);
   }
 
   generateAllEpisodeThumbnailImageURL(imagesArray: Stills[]) {
@@ -133,7 +143,6 @@ export class EpisodeListComponent implements OnInit {
   }
 
   searchEpisode() {
-    console.log(this.searchText);
     this.router.navigate([`episode/search/${this.searchText}`]);
   }
 

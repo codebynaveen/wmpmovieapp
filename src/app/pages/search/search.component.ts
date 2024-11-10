@@ -1,6 +1,6 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {CommonModule} from '@angular/common';
+import {Component} from '@angular/core';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-search',
@@ -31,8 +31,6 @@ export class SearchComponent {
         repatedValueMap.set(char, 0);
       }
     });
-
-    console.log(repatedValueMap);
   }
 
 }

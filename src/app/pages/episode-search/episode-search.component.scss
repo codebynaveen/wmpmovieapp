@@ -73,28 +73,91 @@
   @include d-flex($direction: column, $align: center, $justify: center);
   width: 100%;
   text-align: center;
-  padding-top: 8rem;
+
+  @include apply-styles-until('xs') {
+    padding-top: 3rem;
+    gap: $spacing-3;
+  }
+
+  @include apply-styles-between('xs', 'md') {
+    padding-top: 3rem;
+    gap: $spacing-3;
+  }
+
+  @include apply-styles-from('md') {
+    padding-top: 3rem;
+    gap: $spacing-3;
+  }
 
   .placeholder-image {
-    width: 120px;
-    height: 120px;
     object-fit: contain;
     object-position: center;
+
+    @include apply-styles-until('xs') {
+      width: 60px;
+      height: 60px;
+    }
+
+    @include apply-styles-between('xs', 'md') {
+      width: 60px;
+      height: 60px;
+    }
+
+    @include apply-styles-from('md') {
+      width: 120px;
+      height: 120px;
+    }
   }
 
   .placeholder-title {
-    @include font-primary(32px, $font-weight-medium);
     margin: 0;
     padding: 0;
-    max-width: 350px;
+
+    @include apply-styles-until('xs') {
+      @include font-primary(16px, $font-weight-medium);
+      width: 100%;
+    }
+
+    @include apply-styles-between('xs', 'md') {
+      @include font-primary(18px, $font-weight-medium);
+      width: 100%;
+    }
+
+    @include apply-styles-between('md', 'lg') {
+      @include font-primary(20px, $font-weight-medium);
+      width: 100%;
+    }
+
+    @include apply-styles-from('md') {
+      @include font-primary(22px, $font-weight-medium);
+      max-width: 350px;
+    }
   }
 
   .placeholder-text {
-    @include font-primary(18px, $font-weight-light);
-    max-width: 350px;
     margin: 0;
     padding: 0;
     opacity: 0.6;
+
+    @include apply-styles-until('xs') {
+      @include font-primary(12px, $font-weight-light);
+      width: 100%;
+    }
+
+    @include apply-styles-between('xs', 'md') {
+      @include font-primary(14px, $font-weight-light);
+      width: 100%;
+    }
+
+    @include apply-styles-between('md', 'lg') {
+      @include font-primary(14px, $font-weight-light);
+      width: 100%;
+    }
+
+    @include apply-styles-from('md') {
+      @include font-primary(18px, $font-weight-light);
+      max-width: 350px;
+    }
   }
 }
 

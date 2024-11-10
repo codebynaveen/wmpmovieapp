@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {
   EpisodeSearchResultCardComponent
 } from "../../components/episode-search-result-card/episode-search-result-card.component";
@@ -16,6 +16,7 @@ import {EpisodeThumbnailService} from '../../core/services/episode-thumbnail.ser
 import {Stills, Thumbnail} from '../../core/models/thumbnail';
 import {FormsModule} from '@angular/forms';
 import {animate, query, stagger, style, transition, trigger} from '@angular/animations';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-episode-detail',
@@ -46,7 +47,7 @@ import {animate, query, stagger, style, transition, trigger} from '@angular/anim
     ])
   ]
 })
-export class EpisodeDetailComponent implements OnInit {
+export class EpisodeDetailComponent implements OnInit, OnDestroy {
 
   protected readonly faBookmark = faBookmark;
 
@@ -68,6 +69,8 @@ export class EpisodeDetailComponent implements OnInit {
 
   protected readonly faAngleLeft = faAngleLeft;
 
+  private subscriptions: Subscription[] = [];
+
   selectTab(tab: string) {
     this.selectedTab = tab;
   }
@@ -81,10 +84,25 @@ export class EpisodeDetailComponent implements OnInit {
   ) {
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       const episodeId = params['episodeId'];
-      this.loadEpisodeInfo(episodeId);
+      const episodeSubscription = this.episodesService.getEpisodeInfo(episodeId).subscribe((data: Episode) => {
+        this.episodeData = data;
+        this.isLoading = false;
+        this.loadCharactersByIds(extractIdsFromUrls(data.characters));
+
+        this.loadThumbnailImages(extractSeasonNumber(this.episodeData.episode), episodeId);
+      }, (error) => {
+        console.error('Error fetching episode info:', error);
+        this.isLoading = false;
+      });
+
+      this.subscriptions.push(episodeSubscription);
     });
   }
 
@@ -92,7 +110,6 @@ export class EpisodeDetailComponent implements OnInit {
     this.episodesService.getEpisodeInfo(episodeId).subscribe((data: Episode) => {
       this.episodeData = data;
       this.isLoading = false;
-      console.log(extractIdsFromUrls(data.characters));
       this.loadCharactersByIds(extractIdsFromUrls(data.characters));
 
       this.loadThumbnailImages(extractSeasonNumber(this.episodeData.episode), episodeId);
@@ -122,7 +139,6 @@ export class EpisodeDetailComponent implements OnInit {
     this.episodeThumbnailService.loadEpisodeThumbnailData(seasonId, episodeId).subscribe((thumbnailData: Thumbnail) => {
       this.episodeCoverImage = this.generateCoverImageURL(thumbnailData.stills);
       this.episodeThumbnailImage = this.generateEpisodeThumbnailImageURL(thumbnailData.stills);
-      console.log(this.episodeCoverImage);
     }, (error) => {
       console.error('Error fetching character info:', error);
     })
