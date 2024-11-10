@@ -40,14 +40,16 @@
     </div>
   </div>
 
-  <div class="loading-placeholder" *ngIf="isLoading">
+  <!-- loading component -->
+  <div *ngIf="isLoading" class="loading-placeholder">
     <div class="spinner-icon-wrapper">
-      <img src="assets/loading-spinner/loading-spinner-icon.png" alt="Loading..." class="loading-spinner" />
+      <img alt="Loading..." class="loading-spinner" src="assets/loading-spinner/loading-spinner-icon.png"/>
     </div>
     <p>Fetching results...</p>
   </div>
 
-  <div class="search-result-placeholder" *ngIf="!isLoading && episodesList.length === 0">
+  <!-- placeholder -->
+  <div *ngIf="!isLoading && episodesList.length === 0" class="search-result-placeholder">
     <img
       alt="no result placeholder"
       class="placeholder-image"
@@ -59,6 +61,7 @@
     </p>
   </div>
 
+  <!-- result items -->
   <div *ngIf="!isLoading && episodesList.length > 0" [@listAnimation]="episodesList.length"
        class="search-result-container">
     <ng-container *ngFor="let episode of episodesList">

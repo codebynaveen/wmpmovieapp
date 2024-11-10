@@ -15,7 +15,7 @@
 
   @include apply-styles-until('xs') {
     border-radius: $spacing-2;
-    gap: $spacing-2;
+    gap: $spacing-3;
   }
 
   @include apply-styles-between('xs', 'md') {
@@ -40,17 +40,17 @@
     border-radius: $spacing-3;
 
     @include apply-styles-until('xs') {
-      width: 90px;
+      width: 120px;
       height: auto;
     }
 
     @include apply-styles-between('xs', 'md') {
       height: auto;
-      width: 160px;
+      width: 140px;
     }
 
     @include apply-styles-from('md') {
-      width: 220px;
+      width: 160px;
       height: auto;
     }
   }
@@ -71,25 +71,25 @@
     }
 
     @include apply-styles-from('md') {
-      gap: $spacing-4;
+      gap: $spacing-3;
     }
 
     .episode-title {
       padding: 0;
 
       @include apply-styles-until('xs') {
-        @include font-primary($size: 12px, $weight: $font-weight-light);
+        @include font-primary($size: 14px, $weight: $font-weight-light);
         margin: 0 0 $spacing-1 0;
       }
 
       @include apply-styles-between('xs', 'md') {
-        @include font-primary($size: 18px, $weight: $font-weight-light);
+        @include font-primary($size: 16px, $weight: $font-weight-light);
         margin: 0 0 $spacing-1 0;
       }
 
       @include apply-styles-from('md') {
-        @include font-primary($size: 22px, $weight: $font-weight-light);
-        margin: 0 0 $spacing-4 0;
+        @include font-primary($size: 18px, $weight: $font-weight-light);
+        margin: 0 0 $spacing-2 0;
       }
     }
 
@@ -108,8 +108,12 @@
         gap: $spacing-1;
       }
 
-      @include apply-styles-from('md') {
-        gap: $spacing-3;
+      @include apply-styles-between('md', 'lg') {
+        gap: $spacing-2;
+      }
+
+      @include apply-styles-from('lg') {
+        gap: $spacing-2;
       }
 
       .episode-rating,
@@ -139,10 +143,12 @@
 
         @include apply-styles-from('lg') {
           gap: $spacing-3;
-          @include font-primary($size: 18px);
+          @include font-primary($size: 14px);
         }
 
         svg {
+          flex-shrink: 0;
+
           @include apply-styles-until('xs') {
             width: 12px;
             height: 12px;

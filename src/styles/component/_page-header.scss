@@ -1,5 +1,4 @@
 .page-container {
-
   @include apply-styles-until('xs') {
     padding: $spacing-3;
   }
@@ -13,11 +12,11 @@
   }
 
   @include apply-styles-between('lg', 'xl') {
-    padding: $spacing-4;
+    padding: $spacing-4 $spacing-1 $spacing-4 $spacing-4;
   }
 
   @include apply-styles-from('xl') {
-    padding: $spacing-5;
+    padding: $spacing-4 $spacing-1 $spacing-4 $spacing-4;
   }
 }
 
@@ -54,15 +53,18 @@
 
     @include apply-styles-between('xs', 'md') {
       @include d-flex($direction: row, $justify: space-between, $align: center);
+      margin: 0 0 $spacing-3 0;
     }
 
     @include apply-styles-from('md') {
-      text-align: left;
+      @include d-flex($direction: row, $justify: flex-start, $align: center);
+      margin: 0 0 $spacing-3 0;
+      gap: $spacing-3;
     }
 
-
     .page-title {
-      @include font-primary($size: $font-size-lg, $weight: $font-weight-regular, $line-height: $line-height-tight);
+      @include font-primary($size: $font-size-lg, $weight: $font-weight-regular, $line-height: 42px);
+      margin: 0;
     }
 
     button.go-back-btn {

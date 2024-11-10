@@ -12,7 +12,19 @@
   background-color: transparentize($color: $white, $amount: 0.8);
   padding: calc($spacing-2 + 0.3rem) calc($spacing-3 + 0.3rem);
   border-radius: $spacing-3;
-  width: 400px;
+
+  @include apply-styles-until('xs') {
+    width: 100%;
+    margin-bottom: $spacing-3;
+  }
+
+  @include apply-styles-between('xs', 'md') {
+    width: 100%;
+  }
+
+  @include apply-styles-from('md') {
+    width: 400px;
+  }
 
   .search-input {
     font-size: 18px;
@@ -49,20 +61,41 @@
     @include d-flex($direction: row, $justify: flex-start, $align: center);
     width: 100%;
     margin-bottom: $spacing-4;
+    overflow-x: auto;
 
     button.tab-button {
-      @include font-primary(22px, $font-weight-light, $line-height-tight);
-      width: 300px;
       height: fit-content;
       background-color: transparent;
       position: relative;
-      padding: $spacing-4;
       color: transparentize($color: $white, $amount: 0.4);
       border-radius: $spacing-2;
       border: 0 solid transparent;
       margin: 0;
       cursor: pointer;
+      white-space: nowrap;
       transition: all 0.5s ease;
+
+      @include apply-styles-until('xs') {
+        @include font-primary(12px, $font-weight-light, $line-height-tight);
+        padding: $spacing-3;
+      }
+
+      @include apply-styles-between('xs', 'md') {
+        @include font-primary(16px, $font-weight-light, $line-height-tight);
+        padding: $spacing-3;
+      }
+
+      @include apply-styles-between('md', 'lg') {
+        @include font-primary(16px, $font-weight-light, $line-height-tight);
+        padding: $spacing-3;
+        width: fit-content;
+      }
+
+      @include apply-styles-from('lg') {
+        @include font-primary(16px, $font-weight-light, $line-height-tight);
+        padding: $spacing-3 $spacing-5;
+        width: fit-content;
+      }
 
       &.active {
         color: $white;
@@ -100,11 +133,11 @@
 
   @include apply-styles-until('xs') {
     grid-template-columns: repeat(1, 1fr);
-    gap: $spacing-3;
+    gap: $spacing-2;
   }
 
   @include apply-styles-between('xs', 'md') {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: $spacing-3;
   }
 

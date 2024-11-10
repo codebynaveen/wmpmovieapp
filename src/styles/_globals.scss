@@ -105,4 +105,19 @@ body {
   @include font-style(900, italic);
 }
 
+// scrollbar styles override
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: #242A32;
+}
+
 

@@ -2,7 +2,9 @@
 <div class="page-container">
   <!-- Header title section -->
   <header class="app-header">
-    <h4 class="header-title-container">The Rick and Morty</h4>
+    <div class="header-title-container">
+      <h4 class="page-title">The Rick and Morty</h4>
+    </div>
     <div class="search-input-component">
       <input (keydown.enter)="searchEpisode()" [(ngModel)]="searchText" class="search-input" placeholder="Search"
              type="text"/>
