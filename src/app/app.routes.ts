@@ -36,4 +36,9 @@ export const routes: Routes = [
       }
     ]
   },
+  {
+    path: '',
+    redirectTo: 'episode/all',
+    pathMatch: 'full'
+  },
 ];

@@ -42,7 +42,7 @@ import {Subscription} from 'rxjs';
           ])
         ], {optional: true})
       ])
-    ])
+    ]),
   ]
 })
 export class EpisodeSearchComponent implements OnInit, OnDestroy {
@@ -57,12 +57,15 @@ export class EpisodeSearchComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
 
+  isResponsive: boolean = false;
+
   constructor(
     private episodeService: EpisodesService,
     private episodeThumbnailService: EpisodeThumbnailService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
   ) {
+    this.checkResponsive();
   }
 
   ngOnInit(): void {
@@ -129,5 +132,12 @@ export class EpisodeSearchComponent implements OnInit, OnDestroy {
       episode.thumbnail = 'https://rickandmortyapi.com/api/character/avatar/249.jpeg' // setting this as the placeholder image because i found this one return the placeholder image like from the DB
     });
     this.subscriptions.push(episodeThumbnailServiceSub);
+  }
+
+  checkResponsive() {
+    this.isResponsive = window.innerWidth < 1920;
+    window.addEventListener('resize', () => {
+      this.isResponsive = window.innerWidth < 1920;
+    });
   }
 }
