@@ -89,6 +89,7 @@ section.episode-detail-wrapper {
         width: 100%;
         height: 220px;
         margin: 0;
+        border-radius: 0 0 $spacing-3 $spacing-3;
       }
     }
   }
@@ -481,6 +482,7 @@ section.episode-detail-wrapper {
   display: grid;
   grid-auto-rows: auto;
   gap: $spacing-4;
+  width: 100%;
 
   @include apply-styles-until('xs') {
     grid-template-columns: repeat(2, 1fr);
@@ -510,16 +512,35 @@ section.episode-detail-wrapper {
   position: fixed;
   top: 0;
   z-index: 1040;
-  background-color: transparentize($primary-color, 0.9);
+  background-color: transparentize($primary-color, 0.4);
   backdrop-filter: blur(100px);
   @include d-flex($direction: row, $justify: center, $align: flex-end);
 }
 
 .rating-modal {
-  width: 40vw;
   background-color: white;
   padding: $spacing-5 $spacing-5;
   border-radius: $spacing-4 $spacing-4 0 0;
+
+  @include apply-styles-until('xs') {
+    width: 100vw;
+  }
+
+  @include apply-styles-between('xs', 'sm') {
+    width: 100vw;
+  }
+
+  @include apply-styles-between('sm', 'md') {
+    width: 60vw;
+  }
+
+  @include apply-styles-between('md', 'lg') {
+    width: 60vw;
+  }
+
+  @include apply-styles-from('lg') {
+    width: 40vw;
+  }
 
   .rating-modal-content {
     position: relative;
@@ -548,7 +569,7 @@ section.episode-detail-wrapper {
     }
 
     .rating-modal-title {
-      @include font-primary($size: 26px, $weight: $font-weight-light);
+      @include font-primary($size: 22px, $weight: $font-weight-light);
       color: $primary-color;
       text-align: center;
       width: 100%;
@@ -610,7 +631,7 @@ section.episode-detail-wrapper {
       border-radius: 50px;
       padding: $spacing-3 $spacing-5;
       text-align: center;
-      @include font-primary($size: 24px, $weight: $font-weight-light);
+      @include font-primary($size: 18px, $weight: $font-weight-light);
       cursor: pointer;
 
       &:hover {

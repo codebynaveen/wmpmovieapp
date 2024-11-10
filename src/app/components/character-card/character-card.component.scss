@@ -20,8 +20,13 @@
       width: 130px;
     }
 
-    @include apply-styles-from('md') {
-      width: 180px;
+    @include apply-styles-between('md', 'lg') {
+      width: 100%;
+    }
+
+    @include apply-styles-from('lg') {
+      width: 100%;
+      max-width: 180px;
     }
   }
 
