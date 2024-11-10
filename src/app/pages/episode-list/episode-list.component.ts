@@ -80,7 +80,7 @@ export class EpisodeListComponent implements OnInit {
     this.episodeThumbnailService.loadEpisodeThumbnailData(seasonId, episodeId).subscribe((thumbnailData: Thumbnail) => {
       episode.thumbnail = this.generateEpisodeThumbnailImageURL(thumbnailData.stills);
     }, (error) => {
-      console.error('Error fetching episode thumbnail:', error);
+      // console.error('Error fetching episode thumbnail:', error);
       episode.thumbnail = 'https://rickandmortyapi.com/api/character/avatar/249.jpeg' // setting this as the placeholder image because i found this one return the placeholder image like from the DB
     })
   }
@@ -88,7 +88,6 @@ export class EpisodeListComponent implements OnInit {
   loadAllEpisodes() {
     this.isLoading = true;
     this.episodeService.getAllEpisodes().subscribe((data: EpisodeResult) => {
-      console.log(data);
       this.allEpisodeList = data.results;
       this.loadThumbnailsForAllEpisodes();
       this.isLoading = false;
@@ -107,7 +106,7 @@ export class EpisodeListComponent implements OnInit {
     this.episodeThumbnailService.loadEpisodeThumbnailData(seasonId, episodeId).subscribe((thumbnailData: Thumbnail) => {
       episode.thumbnail = this.generateAllEpisodeThumbnailImageURL(thumbnailData.stills);
     }, (error) => {
-      console.error('Error fetching episode thumbnail:', error);
+      // console.error('Error fetching episode thumbnail:', error);
       episode.thumbnail = 'https://rickandmortyapi.com/api/character/avatar/249.jpeg' // setting this as the placeholder image because i found this one return the placeholder image like from the DB
     })
   }

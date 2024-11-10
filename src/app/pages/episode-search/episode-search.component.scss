@@ -24,7 +24,18 @@
   background-color: transparentize($color: $white, $amount: 0.8);
   padding: calc($spacing-3 + 0.3rem) calc($spacing-4 + 0.3rem);
   border-radius: $spacing-3;
-  width: 600px;
+
+  @include apply-styles-until('xs') {
+    width: 100%;
+  }
+
+  @include apply-styles-between('xs', 'md') {
+    width: 100%;
+  }
+
+  @include apply-styles-from('md') {
+    width: 600px;
+  }
 
   .search-input {
     font-size: 18px;
@@ -119,7 +130,18 @@
 // search result preview -----------------------------------------------------------------------
 .search-result-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: auto;
   gap: $spacing-4;
+
+  @include apply-styles-until('xs') {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  @include apply-styles-between('xs', 'md') {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  @include apply-styles-from('md') {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }

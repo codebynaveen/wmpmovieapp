@@ -14,6 +14,7 @@ import {CharactersService} from '../../core/services/characters.service';
 import {extractIdsFromUrls, extractSeasonNumber} from '../../core/shared/utils';
 import {EpisodeThumbnailService} from '../../core/services/episode-thumbnail.service';
 import {Stills, Thumbnail} from '../../core/models/thumbnail';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-episode-detail',
@@ -24,7 +25,8 @@ import {Stills, Thumbnail} from '../../core/models/thumbnail';
     NgForOf,
     NgIf,
     CharacterCardComponent,
-    NgClass
+    NgClass,
+    FormsModule
   ],
   templateUrl: './episode-detail.component.html',
   styleUrl: './episode-detail.component.scss'
@@ -34,6 +36,7 @@ export class EpisodeDetailComponent implements OnInit {
   protected readonly faBookmark = faBookmark;
 
   isLoading: boolean = true;
+  isModalOpen: boolean = false;
 
   episodeData: Episode | undefined = undefined;
   episodeCoverImage: string = 'https://placehold.co/1600x260?text=Cover Image';
@@ -46,6 +49,7 @@ export class EpisodeDetailComponent implements OnInit {
     'Cast',
   ];
   selectedTab: string = this.tabList[2];
+  ratingScore: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -104,5 +108,14 @@ export class EpisodeDetailComponent implements OnInit {
     }, (error) => {
       console.error('Error fetching character info:', error);
     })
+  }
+
+  openScoreModal() {
+    this.isModalOpen = true;
+    this.ratingScore = 5.8;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
   }
 }

@@ -27,7 +27,7 @@
 // @param {Number} $line-height - Line height (default: $line-height-base)
 @mixin font-primary(
   $size: $font-size-base,
-  $weight: $font-weight-regular, 
+  $weight: $font-weight-regular,
   $line-height: $line-height-base
 ) {
   font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -37,3 +37,45 @@
   line-height: $line-height;
 }
 
+// Breakpoint Map
+$breakpoints: (
+  'xs': 375px,
+  'sm': 640px,
+  'md': 768px,
+  'lg': 1024px,
+  'xl': 1280px,
+  '2xl': 1536px
+);
+
+// Mixin for applying styles at a minimum width defined by the specified breakpoint
+// @param {String} $breakpoint - The breakpoint key to apply styles from (must exist in $breakpoints map)
+@mixin apply-styles-from($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media screen and (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  }
+}
+
+// Mixin for applying styles between two specified breakpoints
+// @param {String} $from - The starting breakpoint key (must exist in $breakpoints map)
+// @param {String} $to - The ending breakpoint key (must exist in $breakpoints map)
+@mixin apply-styles-between($from, $to) {
+  @if map-has-key($breakpoints, $from) and map-has-key($breakpoints, $to) {
+    $min: map-get($breakpoints, $from);
+    $max: map-get($breakpoints, $to) - 0.02px;
+    @media screen and (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  }
+}
+
+// Mixin for applying styles up to a maximum width defined by the specified breakpoint
+// @param {String} $breakpoint - The breakpoint key to apply styles until (must exist in $breakpoints map)
+@mixin apply-styles-until($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media screen and (max-width: map-get($breakpoints, $breakpoint) - 0.02px) {
+      @content;
+    }
+  }
+}

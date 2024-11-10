@@ -11,7 +11,36 @@
   );
   height: 100%;
   width: fit-content;
-  padding: 0 $spacing-5 0 0;
+
+  @include apply-styles-until('xs') {
+    @include d-flex(
+      $direction: row,
+      $justify: space-evenly,
+      $align: center,
+      $gap: $spacing-5
+    );
+    width: 100%;
+  }
+
+  @include apply-styles-between('xs', 'md') {
+    @include d-flex(
+      $direction: row,
+      $justify: space-evenly,
+      $align: center,
+      $gap: $spacing-5
+    );
+    width: 100%;
+  }
+
+  @include apply-styles-from('md') {
+    @include d-flex(
+      $direction: column,
+      $justify: center,
+      $align: center,
+      $gap: $spacing-5
+    );
+    padding: 0 $spacing-5 0 0;
+  }
 
   button.navigation-btn {
     background: transparent;

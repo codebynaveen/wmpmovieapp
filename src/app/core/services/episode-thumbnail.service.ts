@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {Thumbnail} from '../models/thumbnail';
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -23,12 +24,11 @@ export class EpisodeThumbnailService {
 
     let thumbnailAPI: string = `${this.thumbnailBaseUrl}/season/${seasonNumber}/episode/${episodeNumber}/images?api_key=${this.apiKey}`;
 
-    return this.http.get<Thumbnail>(thumbnailAPI);
-    // .pipe(
-    //   catchError(error => {
-    //     console.error('Error fetching episode thumbnail data', error);
-    //     return throwError(error);
-    //   })
-    // );
+    return this.http.get<Thumbnail>(thumbnailAPI).pipe(
+      catchError((error: any) => {
+        console.error('Error fetching episode thumbnail data', error);
+        return throwError(error);
+      })
+    );
   }
 }

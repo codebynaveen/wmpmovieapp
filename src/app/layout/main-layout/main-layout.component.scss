@@ -1,18 +1,49 @@
 @import "../../../styles/variables";
+@import "../../../styles/breakpoints";
 @import "../../../styles/spacing";
 @import "../../../styles/mixins";
 
 .app-main-layout {
   background-color: $primary-color;
   color: $secondary-color;
-  @include d-flex($direction: row, $justify: flex-start, $align: flex-start, $gap: 0);
+
+  @include apply-styles-until('xs') {
+    @include d-flex($direction: column, $justify: flex-start, $align: flex-start, $gap: 0);
+  }
+
+  @include apply-styles-between('xs', 'md') {
+    @include d-flex($direction: column, $justify: flex-start, $align: flex-start, $gap: 0);
+  }
+
+  @include apply-styles-from('md') {
+    @include d-flex($direction: row, $justify: flex-start, $align: flex-start, $gap: 0);
+  }
 
   app-main-navigation {
-    width: fit-content;
-    height: 100vh;
-    position: sticky;
-    top: 0;
     flex-shrink: 0;
+
+    @include apply-styles-until('xs') {
+      width: 100%;
+      height: fit-content;
+      position: absolute;
+      bottom: 0;
+    }
+
+    @include apply-styles-between('xs', 'md') {
+      width: 100%;
+      height: fit-content;
+      position: sticky;
+      bottom: 0;
+      padding: $spacing-3 $spacing-2;
+      background-color: $primary-color;
+    }
+
+    @include apply-styles-from('md') {
+      width: fit-content;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+    }
   }
 
   .app-content-area {

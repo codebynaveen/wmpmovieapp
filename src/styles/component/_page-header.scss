@@ -1,19 +1,55 @@
 .page-container {
-  padding: $spacing-5;
+
+  @include apply-styles-until('xs') {
+    padding: $spacing-3;
+  }
+
+  @include apply-styles-between('xs', 'md') {
+    padding: $spacing-4;
+  }
+
+  @include apply-styles-from('md') {
+    padding: $spacing-5;
+  }
 }
 
 .app-header {
-  @include d-flex($direction: row, $justify: space-between, $align: center);
   padding: 0;
-  margin-bottom: $spacing-4;
   width: 100%;
+
+  @include apply-styles-until('xs') {
+    @include d-flex($direction: column, $justify: space-between, $align: center);
+    margin-bottom: $spacing-2;
+  }
+
+  @include apply-styles-between('xs', 'md') {
+    @include d-flex($direction: column, $justify: space-between, $align: center);
+    margin-bottom: $spacing-3;
+  }
+
+  @include apply-styles-from('md') {
+    @include d-flex($direction: row, $justify: space-between, $align: center);
+    margin-bottom: $spacing-4;
+  }
 
   .header-title {
     @include font-primary($font-size-lg, $font-weight-semibold, $line-height-tight);
+    width: 100%;
     color: $secondary-color;
     margin: 0;
     padding: 0;
     left: 0;
-    text-align: left;
+
+    @include apply-styles-until('xs') {
+      @include d-flex($direction: row, $justify: space-between, $align: center);
+    }
+
+    @include apply-styles-between('xs', 'md') {
+      @include d-flex($direction: row, $justify: space-between, $align: center);
+    }
+
+    @include apply-styles-from('md') {
+      text-align: left;
+    }
   }
 }

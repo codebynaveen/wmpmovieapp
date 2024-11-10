@@ -6,6 +6,9 @@
 /* Import variables (colors, etc.) */
 @import "./styles/variables";
 
+// Importing breakpoints for responsive design
+@import "./styles/breakpoints";
+
 // Importing mixins for reusable styles and functions
 @import "./styles/mixins";
 

@@ -55,7 +55,7 @@
               <span>{{ "139 " }} Minutes</span>
             </div>
 
-            <div class="episode-rating">
+            <div (click)="openScoreModal()" class="episode-rating">
               <svg
                 fill="none"
                 height="24"
@@ -98,4 +98,24 @@
       </div>
     </div>
   </section>
+</div>
+
+<div *ngIf="isModalOpen" class="rating-modal-container">
+  <div class="rating-modal">
+    <div class="rating-modal-content">
+      <button (click)="closeModal()" class="rating-modal-close">
+        <img alt="close modal" src="/assets/icons/multiplication-sign.svg">
+      </button>
+
+      <h2 class="rating-modal-title">Rate this episode</h2>
+
+      <div class="rating-modal-score">{{ ratingScore }}</div>
+
+      <div class="rating-modal-slider-container">
+        <input [(ngModel)]="ratingScore" class="rating-modal-slider" max="10" min="0" step="0.1" type="range">
+      </div>
+
+      <button (click)="closeModal()" class="rating-modal-submit" type="button">OK</button>
+    </div>
+  </div>
 </div>

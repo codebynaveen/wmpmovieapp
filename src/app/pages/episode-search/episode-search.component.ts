@@ -3,7 +3,7 @@ import {EpisodeCardComponent} from '../../components/episode-card/episode-card.c
 import {NgFor, NgIf, NgOptimizedImage} from '@angular/common';
 import {TopEpisodesListComponent} from '../../components/top-episodes-list/top-episodes-list.component';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
-import {faInfoCircle} from '@fortawesome/free-solid-svg-icons';
+import {faAngleLeft, faInfoCircle} from '@fortawesome/free-solid-svg-icons';
 import {EpisodesService} from '../../core/services/episodes.service';
 import {Episode, EpisodeResult} from '../../core/models/episode';
 import {
@@ -32,6 +32,8 @@ import {extractEpisodeNumber} from '../../core/shared/utils';
 export class EpisodeSearchComponent implements OnInit {
 
   protected readonly faInfoCircle = faInfoCircle;
+  protected readonly faAngleLeft = faAngleLeft;
+
   episodesList: Episode[] = [];
   isLoading: boolean = false;
 

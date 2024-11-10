@@ -51,6 +51,5 @@ export function extractSeasonNumber(episodeCode: string): number {
  * @returns The episode number as a number.
  */
 export function extractEpisodeNumber(episodeCode: string): number {
-  console.log(parseInt(episodeCode.split('E')[1], 10));
   return parseInt(episodeCode.split('E')[1], 10);
 }
