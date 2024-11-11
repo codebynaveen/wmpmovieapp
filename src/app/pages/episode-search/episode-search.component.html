@@ -16,7 +16,7 @@
     <div class="search-input-component">
       <input (keydown.enter)="searchEpisode()" [(ngModel)]="searchText" class="search-input" placeholder="Search"
              type="text"/>
-      <svg
+      <svg (click)="searchEpisode()"
         class="search-icon"
         fill="none"
         height="24"
