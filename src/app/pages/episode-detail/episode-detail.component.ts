@@ -132,7 +132,7 @@ export class EpisodeDetailComponent implements OnInit, OnDestroy {
   }
 
   generateCoverImageURL(imagesArray: Stills[]) {
-    return `https://image.tmdb.org/t/p/w500${imagesArray[2].file_path}`;
+    return `https://image.tmdb.org/t/p/original${imagesArray[2].file_path}`;
   }
 
   loadThumbnailImages(seasonId: number, episodeId: number) {
